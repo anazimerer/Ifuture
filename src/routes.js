@@ -11,6 +11,7 @@ import RestaurantPage from "./components/RestaurantPage";
 import CartPage from "./components/CartPage";
 import OrdersPage from "./components/OrdersPage";
 import ProfilePage from "./components/ProfilePage";
+import FourOFour from "./components/FourOFour";
 
 const Router = () => {
   return (
@@ -24,12 +25,15 @@ const Router = () => {
         <ProtectedRoute exact path="/search" component={SearchPage} />
         <ProtectedRoute
           exact
-          path="/restaurant/:restaurantId"
+          path="/restaurants/:restaurantId"
           component={RestaurantPage}
         />
         <ProtectedRoute exact path="/cart" component={CartPage} />
         <ProtectedRoute exact path="/orders" component={OrdersPage} />
         <ProtectedRoute exact path="/profile" component={ProfilePage} />
+        <Route path="/">
+          <FourOFour />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

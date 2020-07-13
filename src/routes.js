@@ -31,7 +31,6 @@ const Router = () => {
         <ProtectedRoute exact path="/orders" component={OrdersPage} />
         <ProtectedRoute exact path="/profile" component={ProfilePage} />
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 };

@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import SplashScreen from "./components/SplashScreen";
 import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
-import AddessPage from "./components/AddessPage";
+import AddressPage from "./components/AddressPage";
 import FeedPage from "./components/FeedPage";
 import SearchPage from "./components/SearchPage";
 import RestaurantPage from "./components/RestaurantPage";
@@ -19,7 +19,7 @@ const Router = () => {
         <Route exact path="/" component={SplashScreen} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/signup" component={SignupPage} />
-        <ProtectedRoute exact path="/address" component={AddessPage} />
+        <ProtectedRoute exact path="/address" component={AddressPage} />
         <ProtectedRoute exact path="/restaurants" component={FeedPage} />
         <ProtectedRoute exact path="/search" component={SearchPage} />
         <ProtectedRoute

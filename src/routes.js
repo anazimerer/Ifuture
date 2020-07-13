@@ -7,7 +7,7 @@ import SignupPage from "./components/SignupPage";
 import AddressPage from "./components/AddressPage";
 import FeedPage from "./components/FeedPage";
 import SearchPage from "./components/SearchPage";
-import RestaurantPage from "./components/RestaurantPage";
+import RestaurantPage from "./components/RestaurantePage";
 import CartPage from "./components/CartPage";
 import OrdersPage from "./components/OrdersPage";
 import ProfilePage from "./components/ProfilePage";

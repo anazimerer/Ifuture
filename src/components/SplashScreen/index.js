@@ -30,6 +30,7 @@ const SplashScreen = () => {
         <img src={logoIcon} alt='ifuture' />
       </Grow>
     </Container>
+
   );
 };
 

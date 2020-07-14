@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 //import { getRestaurants } from '../../functions/axios';
+
+import Header from '../Header';
+import Footer from '../Footer';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -8,28 +11,23 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  Typography ,
-  CardMedia ,
+  Typography,
+  CardMedia,
   Container,
   Button,
   AppBar,
-  Card
-}
-from "@material-ui/core";
+  Card,
+} from '@material-ui/core';
 
-import {
-  TitleBarContainer,
-  Title,
-} from './styles';
-
+import { TitleBarContainer, Title } from './styles';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    border: "1px solid #b8b8b8",
+    border: '1px solid #b8b8b8',
     marginBottom: '2vh',
     boxShadow: 'none',
-    borderRadius: '10px'
+    borderRadius: '10px',
   },
 
   title: {
@@ -37,77 +35,80 @@ const useStyles = makeStyles({
     color: '#e8222e',
     fontFamily: 'Roboto, sans-serif',
     letterSpacing: '-0.39px',
-
-  }
+  },
 });
-
-
-import Header from "../Header";
-import Footer from "../Footer";
 
 const FeedPage = () => {
   const classes = useStyles();
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    getRestaurants()
+    getRestaurants();
   }, []);
 
-  const key =
-    { headers: {
-    auth: JSON.parse(localStorage.getItem("labefood")).token
-  }}
+  const key = {
+    headers: {
+      auth: JSON.parse(localStorage.getItem('labefood')).token,
+    },
+  };
 
   const getRestaurants = () => {
+    axios
+      .get(
+        'https://us-central1-missao-newton.cloudfunctions.net/fourFoodA/restaurants',
+        key
+      )
+      .then((response) => {
+        setRestaurants(response.data.restaurants);
+      })
+      .catch((error) => {
+        console.log(error.data);
+      });
+  };
 
-    axios.get("https://us-central1-missao-newton.cloudfunctions.net/fourFoodA/restaurants", key)
-    .then(response => {
-      
-      setRestaurants(response.data.restaurants)
-    })
-    .catch(error => {
-      console.log(error.data)
-    })
-  }
-
-  
-  console.log(restaurants)
+  console.log(restaurants);
 
   return (
     <>
-    <TitleBarContainer>
+      <TitleBarContainer>
         <Title>Ifuture</Title>
       </TitleBarContainer>
-    <Container maxWidth="md">
-      {restaurants.map(rest => {
-        return(
-          <Card key={rest.id} className={classes.root}>
-            
-            <CardActionArea>
-            <CardMedia
-              component="img"
-              alt={rest.name}
-              height="140"
-              image={rest.logoUrl}
-              title={rest.name}
-            />
-            <CardContent>
-          <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
-            {rest.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {rest.shipping} min
-          </Typography>
-        </CardContent>
-            </CardActionArea>
-          </Card>
-        )
+      <Container maxWidth='md'>
+        {restaurants.map((rest) => {
+          return (
+            <Card key={rest.id} className={classes.root}>
+              <CardActionArea>
+                <CardMedia
+                  component='img'
+                  alt={rest.name}
+                  height='140'
+                  image={rest.logoUrl}
+                  title={rest.name}
+                />
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant='h5'
+                    component='h2'
+                    className={classes.title}
+                  >
+                    {rest.name}
+                  </Typography>
+                  <Typography
+                    variant='body2'
+                    color='textSecondary'
+                    component='p'
+                  >
+                    {rest.shipping} min
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          );
+        })}
 
-      })}
-
-
-      <Footer />
-    </Container>
+        <Footer />
+      </Container>
     </>
   );
 };

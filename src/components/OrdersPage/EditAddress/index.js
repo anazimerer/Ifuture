@@ -102,7 +102,7 @@ const EditAddress = () => {
 
   return (
     <Container style={{ height: '100vh', padding: 0 }} maxWidth='md'>
-      <AppBar>
+      <AppBar color='transparent' elevation={1}>
         <Toolbar>
           <IconButton onClick={handleBackIcon}>
             <img
@@ -118,7 +118,7 @@ const EditAddress = () => {
           <Typography
             style={{ margin: '0 auto', transform: 'translateX(-23.5px)' }}
           >
-            Editar
+            Editar Endereço
           </Typography>
         </Toolbar>
       </AppBar>
@@ -237,10 +237,6 @@ const EditAddress = () => {
           )}
         </Grid>
       </Grid>
-
-      <AppBar position='fixed' style={{ top: 'auto', bottom: 0 }}>
-        tchau
-      </AppBar>
     </Container>
   );
 };

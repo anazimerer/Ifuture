@@ -90,7 +90,7 @@ const EditUser = () => {
 
   return (
     <Container style={{ height: '100vh', padding: 0 }} maxWidth='md'>
-      <AppBar>
+      <AppBar color='transparent' elevation={1}>
         <Toolbar>
           <IconButton onClick={handleBackIcon}>
             <img
@@ -106,7 +106,7 @@ const EditUser = () => {
           <Typography
             style={{ margin: '0 auto', transform: 'translateX(-23.5px)' }}
           >
-            Editar
+            Editar Perfil
           </Typography>
         </Toolbar>
       </AppBar>
@@ -174,10 +174,6 @@ const EditUser = () => {
           </form>
         </Grid>
       </Grid>
-
-      <AppBar position='fixed' style={{ top: 'auto', bottom: 0 }}>
-        tchau
-      </AppBar>
     </Container>
   );
 };

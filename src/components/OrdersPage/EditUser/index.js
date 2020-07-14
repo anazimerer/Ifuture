@@ -90,7 +90,7 @@ const EditUser = () => {
 
   return (
     <Container style={{ height: '100vh', padding: 0 }} maxWidth='md'>
-      <AppBar color='secundary' elevation={1}>
+      <AppBar color='transparent' elevation={1}>
         <Toolbar>
           <IconButton onClick={handleBackIcon}>
             <img

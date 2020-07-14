@@ -8,8 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import styled from 'styled-components';
 
-import Header from '../../Header';
-
 import {
   Container,
   AppBar,
@@ -104,7 +102,7 @@ const EditAddress = () => {
 
   return (
     <Container style={{ height: '100vh', padding: 0 }} maxWidth='md'>
-      <AppBar color='secundary' elevation={1}>
+      <AppBar color='transparent' elevation={1}>
         <Toolbar>
           <IconButton onClick={handleBackIcon}>
             <img

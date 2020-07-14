@@ -8,7 +8,7 @@ const useInput = (initialValue) => {
   };
 
   const resetForm = () => {
-    setForm(initialValue);
+    setInput(initialValue);
   };
 
   return [input, onChange, resetForm];

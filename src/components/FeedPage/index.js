@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import Header from "../Header";
+import Footer from "../Footer";
 //import { getRestaurants } from '../../functions/axios';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,7 +43,6 @@ const useStyles = makeStyles({
   }
 });
 
-
 const FeedPage = () => {
   const classes = useStyles();
   const [restaurants, setRestaurants] = useState([]);
@@ -66,7 +67,6 @@ const FeedPage = () => {
       console.log(error.data)
     })
   }
-
   
   console.log(restaurants)
 
@@ -102,9 +102,7 @@ const FeedPage = () => {
 
       })}
 
-      <AppBar position="fixed" style={{ top: "auto", bottom: 0 }}>
-        tchau
-      </AppBar>
+      <Footer />
     </Container>
     </>
   );

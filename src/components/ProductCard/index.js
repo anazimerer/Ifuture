@@ -24,7 +24,7 @@ const ProductCard = (props) => {
 
   return (
     <Product>
-      <Img src={product.photoUrl} alt={product.name} />
+      <Img src={product.photoUrl} alt={`Imagem de ${product.name}`} />
       <Name>{product.name}</Name>
       <Qtd inCart={quantity}>{quantity}</Qtd>
       <Price>{`R$${product.price.toFixed(2)}`}</Price>

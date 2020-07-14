@@ -134,7 +134,7 @@ const SignupPage = () => {
             placeholder="000.000.000-00"
             name="cpf"
             type="text"
-            inputProps={{ pattern: "[2]{11}" }}
+            // inputProps={{ pattern: "[2]{11}" }}
           />
           <FormControl
             variant="outlined"

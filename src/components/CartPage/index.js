@@ -4,6 +4,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import CartCard from "../CartCard";
 import { ContainerCart, CartList, SubTotal, useStyles } from "./styled";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const CartPage = () => {
   const classes = useStyles();
@@ -12,6 +14,7 @@ const CartPage = () => {
 
   return (
     <ContainerCart>
+     <Header title="Meu carrinho" />
       <CartList>
         <ListItemText primary="Endereço" />
         <Divider />
@@ -41,7 +44,9 @@ const CartPage = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-          >Confirmar</Button>
+          >Confirmar
+      </Button>
+       <Footer />
     </ContainerCart>
   );
 };

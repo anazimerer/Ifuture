@@ -54,7 +54,7 @@ const SignupPage = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
 
-  const mCPF = (cpf) => {
+  const formatCpf = (cpf) => {
     cpf = cpf.replace(/\D/g, "");
     cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
     cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
@@ -63,7 +63,7 @@ const SignupPage = () => {
   };
 
   const handleCPFChange = (event) => {
-    event.target.value = mCPF(event.target.value);
+    event.target.value = formatCpf(event.target.value);
     if (event.target.value.length <= 14) {
       handleFormChange(event);
     }

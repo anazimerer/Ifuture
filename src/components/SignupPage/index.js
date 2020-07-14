@@ -69,7 +69,7 @@ const SignupPage = () => {
       const response = await signup(form);
       if (response.token) {
         localStorage.setItem("labefood", JSON.stringify(response));
-        history.push("/restaurants");
+        history.push("/address");
       } else {
         window.alert(response.message);
       }

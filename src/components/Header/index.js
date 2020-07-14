@@ -10,7 +10,7 @@ const Header = (props) => {
   return (
     <AppHeader>
       <Wrapper>
-        {back ? <BackButton onClick={() => history.back()} /> : <div />}
+        {back ? <BackButton onClick={() => history.goBack()} /> : <div />}
         <Title>{title}</Title>
       </Wrapper>
     </AppHeader>

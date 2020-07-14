@@ -16,9 +16,12 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Paper,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import editIcon from '../../img/edit.svg';
+import editIcon from "../../img/edit.svg";
+
+import Footer from "../Footer";
+
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
@@ -41,7 +44,7 @@ const OrdersPage = () => {
   };
 
   return (
-    <Container style={{ height: '100vh', padding: 0 }} maxWidth='md'>
+    <Container style={{ height: "100vh", padding: 0 }} maxWidth="md">
       <AppBar>
         <Toolbar>
           <Typography style={{ margin: '0 auto' }}>Meu Perfil</Typography>
@@ -54,6 +57,7 @@ const OrdersPage = () => {
       <Grid container>
         <Grid item xs={12}>
           <List>
+
             <ListItem style={{ borderBottom: '1px solid black' }}>
               <Box style={{ display: 'flex', flexDirection: 'column' }}>
                 <ListItemText style={{ margin: 0 }} primary={user.name} />
@@ -68,21 +72,22 @@ const OrdersPage = () => {
                 >
                   <img
                     src={editIcon}
-                    alt='Edit'
+                    alt="Edit"
                     style={{
-                      width: '1.5rem',
-                      height: '1.5rem',
-                      objectFit: 'contain',
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      objectFit: "contain",
                     }}
                   />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
 
-            <ListItem style={{ backgroundColor: '#eeeeee' }}>
-              <Box style={{ display: 'flex', flexDirection: 'column' }}>
+            <ListItem style={{ backgroundColor: "#eeeeee" }}>
+              <Box style={{ display: "flex", flexDirection: "column" }}>
                 <ListItemText
                   primary={
+
                     user.hasAddress ? (
                       <Typography style={{ color: '#b8b8b8' }}>
                         Endereço cadastrado
@@ -98,6 +103,7 @@ const OrdersPage = () => {
                 <ListItemText primary={user.hasAddress && user.address} />
               </Box>
               <ListItemSecondaryAction>
+
                 <IconButton
                   edge='end'
                   aria-label='edit'
@@ -105,11 +111,11 @@ const OrdersPage = () => {
                 >
                   <img
                     src={editIcon}
-                    alt='Edit'
+                    alt="Edit"
                     style={{
-                      width: '1.5rem',
-                      height: '1.5rem',
-                      objectFit: 'contain',
+                      width: "1.5rem",
+                      height: "1.5rem",
+                      objectFit: "contain",
                     }}
                   />
                 </IconButton>
@@ -122,17 +128,17 @@ const OrdersPage = () => {
           item
           xs={12}
           style={{
-            marginTop: '0',
-            paddingLeft: '16px',
-            paddingRight: '16px',
+            marginTop: "0",
+            paddingLeft: "16px",
+            paddingRight: "16px",
           }}
         >
-          <Box style={{ borderBottom: '1px solid black' }}>
+          <Box style={{ borderBottom: "1px solid black" }}>
             <Typography
               style={{
-                fontSize: '1rem',
-                letterSpacing: '-0.39px',
-                padding: '0.5rem 0',
+                fontSize: "1rem",
+                letterSpacing: "-0.39px",
+                padding: "0.5rem 0",
               }}
             >
               Histório de pedidos
@@ -141,14 +147,15 @@ const OrdersPage = () => {
 
           <Grid
             container
-            style={{ paddingBottom: '2rem', marginTop: '0.5rem' }}
+            style={{ paddingBottom: "2rem", marginTop: "0.5rem" }}
           >
             {orders.length > 0 ? (
               orders.reverse().map((order) => {
                 const date = new Date(order.expiresAt).toLocaleDateString(
-                  'pt-br'
+                  "pt-br"
                 );
                 return (
+
                   <Grid
                     key={order.createdAt}
                     item
@@ -158,27 +165,27 @@ const OrdersPage = () => {
                     <Paper style={{ padding: '1rem' }}>
                       <Typography
                         style={{
-                          color: '#e8222e',
-                          fontSize: '1rem',
-                          letterSpacing: '-0.39px',
+                          color: "#e8222e",
+                          fontSize: "1rem",
+                          letterSpacing: "-0.39px",
                         }}
                       >
                         {order.restaurantName}
                       </Typography>
                       <Typography
                         style={{
-                          fontSize: '0.75rem',
-                          letterSpacing: '-0.29px',
-                          margin: '0.5rem 0',
+                          fontSize: "0.75rem",
+                          letterSpacing: "-0.29px",
+                          margin: "0.5rem 0",
                         }}
                       >
                         {date}
                       </Typography>
                       <Typography
                         style={{
-                          fontSize: '1rem',
-                          fontWeight: 'bold',
-                          letterSpacing: '-0.29px',
+                          fontSize: "1rem",
+                          fontWeight: "bold",
+                          letterSpacing: "-0.29px",
                         }}
                       >
                         SUBTOTAL R${order.totalPrice.toFixed(2)}
@@ -194,6 +201,7 @@ const OrdersPage = () => {
                 </Typography>
               </Grid>
             ) : (
+
               <Grid item xs={12} style={{ marginTop: '.5rem' }}>
                 <Typography inline='true' align='center'>
                   Você não realizou nenhum pedido
@@ -204,9 +212,7 @@ const OrdersPage = () => {
         </Grid>
       </Grid>
 
-      <AppBar position='fixed' style={{ top: 'auto', bottom: 0 }}>
-        tchau
-      </AppBar>
+      <Footer />
     </Container>
   );
 };

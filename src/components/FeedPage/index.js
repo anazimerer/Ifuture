@@ -42,6 +42,9 @@ const useStyles = makeStyles({
 });
 
 
+import Header from "../Header";
+import Footer from "../Footer";
+
 const FeedPage = () => {
   const classes = useStyles();
   const [restaurants, setRestaurants] = useState([]);
@@ -102,9 +105,8 @@ const FeedPage = () => {
 
       })}
 
-      <AppBar position="fixed" style={{ top: "auto", bottom: 0 }}>
-        tchau
-      </AppBar>
+
+      <Footer />
     </Container>
     </>
   );

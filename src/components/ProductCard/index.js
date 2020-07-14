@@ -7,18 +7,20 @@ const ProductCard = (props) => {
   const { product } = props;
   const cartContext = useContext(CartContext);
 
-  const handleButtonClick = () => {
-    quantity
-      ? cartContext.dispatch({
-          type: "REMOVE_ITEM_FROM_CART",
-          productId: product.id,
-        })
-      : cartContext.dispatch({ type: "ADD_ITEM_TO_CART", product: product });
-  };
-
   let quantity = 0;
   const productInCart = cartContext.cart.find((item) => item.id === product.id);
   productInCart && (quantity = productInCart.quantity);
+
+  const handleButtonClick = () => {
+    if (quantity) {
+      cartContext.dispatch({
+        type: "REMOVE_ITEM_FROM_CART",
+        productId: product.id,
+      });
+    } else {
+      cartContext.dispatch({ type: "ADD_ITEM_TO_CART", product: product });
+    }
+  };
 
   return (
     <Product>

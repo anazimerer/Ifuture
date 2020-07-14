@@ -41,6 +41,7 @@ const Footer = () => {
       </svg>
     );
   };
+
   const ProfileButton = (active) => {
     return (
       <svg
@@ -57,6 +58,7 @@ const Footer = () => {
       </svg>
     );
   };
+
   return (
     <AppFooter>
       <Wrapper>

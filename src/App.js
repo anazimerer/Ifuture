@@ -1,14 +1,19 @@
-import React from 'react';
-import Router from './routes';
+import React, { useReducer } from "react";
+import Router from "./routes";
 
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CartContext from "./contexts/CartContext";
+import { cartReducer, initialState } from "./reducers/cart";
+
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const App = () => {
+  const [state, dispatch] = useReducer(cartReducer, initialState);
+
   return (
-    <>
+    <CartContext.Provider value={{ cart: state.cart, dispatch: dispatch }}>
       <CssBaseline />
       <Router />
-    </>
+    </CartContext.Provider>
   );
 };
 

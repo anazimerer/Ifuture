@@ -57,6 +57,13 @@ const AddressPage = () => {
     }
   };
 
+  const handleNumberChange = (event) => {
+    const re = /[^0-9]/g;
+    if (event.target.value.replace(re, "").length > form.number.length) {
+      handleFormChange(event);
+    }
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Header back />
@@ -81,7 +88,7 @@ const AddressPage = () => {
           />
           <TextFieldWrapper
             style={{ borderRadius: "0px", marginBottom: "0.5rem" }}
-            onChange={handleFormChange}
+            onChange={handleNumberChange}
             value={form.number}
             variant="outlined"
             margin="normal"
@@ -98,7 +105,6 @@ const AddressPage = () => {
             value={form.complement}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             label="Complemento"
             placeholder="Apto. / Bloco"

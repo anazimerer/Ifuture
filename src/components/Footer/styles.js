@@ -20,7 +20,3 @@ export const Wrapper = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
-
-export const Svg = styled.svg`
-  fill: ${({ active }) => (active ? "#E8222E" : "#B8B8B8")};
-`;

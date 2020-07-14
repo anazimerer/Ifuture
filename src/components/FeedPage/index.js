@@ -4,6 +4,8 @@ import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Card from "@material-ui/core/Card";
 
+import Footer from "../Footer";
+
 const FeedPage = () => {
   return (
     <Container
@@ -31,9 +33,7 @@ const FeedPage = () => {
       <Card>Restaurante</Card>
       <Card>Restaurante</Card>
 
-      <AppBar position="fixed" style={{ top: "auto", bottom: 0 }}>
-        tchau
-      </AppBar>
+      <Footer />
     </Container>
   );
 };

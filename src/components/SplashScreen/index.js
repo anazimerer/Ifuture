@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { findByLabelText } from "@testing-library/react";
 
 const SplashScreen = () => {
   const history = useHistory();

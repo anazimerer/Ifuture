@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import AppBar from "@material-ui/core/AppBar";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import AppBar from '@material-ui/core/AppBar';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 export const AppHeader = styled(AppBar)`
   height: 2.75rem;
@@ -14,7 +14,7 @@ export const AppHeader = styled(AppBar)`
 export const Wrapper = styled.div`
   display: grid;
   height: 100%;
-  grid-template-areas: "back title empty";
+  grid-template-areas: 'back title empty';
   grid-template-columns: auto 1fr auto;
   align-items: center;
 `;

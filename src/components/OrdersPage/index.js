@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { getOrdersHistory } from '../../functions/axios';
 
 import {
   Container,
@@ -17,53 +20,32 @@ import {
 
 import editIcon from '../../img/edit.svg';
 
-const userMock = {
-  id: 'De8UACSFgFySnKdXm5hI',
-  name: 'Astrodev',
-  email: 'astrodev@future4.com',
-  cpf: '111.111.111-11',
-  hasAddress: true,
-  address: 'R. Afonso Braz, 177 - Vila N. Conceição',
-};
-
-const ordersMock = [
-  {
-    totalPrice: 12,
-    restaurantName: 'Habibs',
-    createdAt: 1592776888220,
-    expiresAt: 1592780488220,
-  },
-  {
-    totalPrice: 31.9,
-    restaurantName: 'McDonalds',
-    createdAt: 1592580176733,
-    expiresAt: 1592581076733,
-  },
-  {
-    totalPrice: 31.9,
-    restaurantName: 'McDonalds',
-    createdAt: 1592578036786,
-    expiresAt: 1592578936786,
-  },
-  {
-    totalPrice: 37.3,
-    restaurantName: 'Tadashii',
-    createdAt: 1592493955887,
-    expiresAt: 1592496955887,
-  },
-  {
-    totalPrice: 37.3,
-    restaurantName: 'Tadashii',
-    createdAt: 1592493955887,
-    expiresAt: 1592496955887,
-  },
-];
-
 const OrdersPage = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const history = useHistory();
+
+  const user = JSON.parse(window.localStorage.getItem('labefood')).user;
+
+  useEffect(() => {
+    (async () => {
+      const res = await getOrdersHistory();
+      setOrders(res);
+      setLoading(false);
+    })();
+  }, []);
+
+  const handleEditButton = (path) => {
+    history.push(`/orders/${path}`);
+  };
+
   return (
     <Container style={{ height: '100vh', padding: 0 }} maxWidth='md'>
       <AppBar>
-        <Toolbar>oie</Toolbar>
+        <Toolbar>
+          <Typography style={{ margin: '0 auto' }}>Meu Perfil</Typography>
+        </Toolbar>
       </AppBar>
 
       {/* Para Espaçamento */}
@@ -74,12 +56,16 @@ const OrdersPage = () => {
           <List>
             <ListItem style={{ borderBottom: '1px solid black' }}>
               <Box style={{ display: 'flex', flexDirection: 'column' }}>
-                <ListItemText style={{ margin: 0 }} primary={userMock.name} />
-                <ListItemText style={{ margin: 0 }} primary={userMock.email} />
-                <ListItemText style={{ margin: 0 }} primary={userMock.cpf} />
+                <ListItemText style={{ margin: 0 }} primary={user.name} />
+                <ListItemText style={{ margin: 0 }} primary={user.email} />
+                <ListItemText style={{ margin: 0 }} primary={user.cpf} />
               </Box>
               <ListItemSecondaryAction>
-                <IconButton edge='end' aria-label='delete'>
+                <IconButton
+                  edge='end'
+                  aria-label='edit'
+                  onClick={() => handleEditButton('user')}
+                >
                   <img
                     src={editIcon}
                     alt='Edit'
@@ -97,22 +83,26 @@ const OrdersPage = () => {
               <Box style={{ display: 'flex', flexDirection: 'column' }}>
                 <ListItemText
                   primary={
-                    userMock.hasAddress ? (
+                    user.hasAddress ? (
                       <Typography style={{ color: '#b8b8b8' }}>
-                        Endereço cadastro
+                        Endereço cadastrado
                       </Typography>
                     ) : (
-                      'Sem endereço'
+                      <Typography style={{ color: '#b8b8b8' }}>
+                        Nenhum endereço cadastrado
+                      </Typography>
                     )
                   }
                   style={{ marginBottom: 0 }}
                 />
-                <ListItemText
-                  primary={userMock.hasAddress && userMock.address}
-                />
+                <ListItemText primary={user.hasAddress && user.address} />
               </Box>
               <ListItemSecondaryAction>
-                <IconButton edge='end' aria-label='delete'>
+                <IconButton
+                  edge='end'
+                  aria-label='edit'
+                  onClick={() => handleEditButton('address')}
+                >
                   <img
                     src={editIcon}
                     alt='Edit'
@@ -153,13 +143,18 @@ const OrdersPage = () => {
             container
             style={{ paddingBottom: '2rem', marginTop: '0.5rem' }}
           >
-            {ordersMock ? (
-              ordersMock.reverse().map((order) => {
+            {orders.length > 0 ? (
+              orders.reverse().map((order) => {
                 const date = new Date(order.expiresAt).toLocaleDateString(
                   'pt-br'
                 );
                 return (
-                  <Grid item xs={12} style={{ marginTop: '.5rem' }}>
+                  <Grid
+                    key={order.createdAt}
+                    item
+                    xs={12}
+                    style={{ marginTop: '.5rem' }}
+                  >
                     <Paper style={{ padding: '1rem' }}>
                       <Typography
                         style={{
@@ -192,9 +187,17 @@ const OrdersPage = () => {
                   </Grid>
                 );
               })
+            ) : loading ? (
+              <Grid item xs={12} style={{ marginTop: '.5rem' }}>
+                <Typography inline='true' align='center'>
+                  Buscando...
+                </Typography>
+              </Grid>
             ) : (
               <Grid item xs={12} style={{ marginTop: '.5rem' }}>
-                <Typography>Você não realizou nenhum pedido</Typography>
+                <Typography inline='true' align='center'>
+                  Você não realizou nenhum pedido
+                </Typography>
               </Grid>
             )}
           </Grid>

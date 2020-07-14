@@ -9,28 +9,60 @@ const SplashScreen = () => {
   };
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <button value={"/login"} onClick={handleClick}>
+      <button
+        style={{ fontSize: "4rem" }}
+        value={"/login"}
+        onClick={handleClick}
+      >
         login
       </button>
-      <button value={"/signup"} onClick={handleClick}>
+      <button
+        style={{ fontSize: "4rem" }}
+        value={"/signup"}
+        onClick={handleClick}
+      >
         signup
       </button>
-      <button value={"/address"} onClick={handleClick}>
+      <button
+        style={{ fontSize: "4rem" }}
+        value={"/address"}
+        onClick={handleClick}
+      >
         address
       </button>
-      <button value={"/restaurants"} onClick={handleClick}>
+      <button
+        style={{ fontSize: "4rem" }}
+        value={"/restaurants"}
+        onClick={handleClick}
+      >
         restaurants
       </button>
-      <button value={"/search"} onClick={handleClick}>
+      <button
+        style={{ fontSize: "4rem" }}
+        value={"/search"}
+        onClick={handleClick}
+      >
         search
       </button>
-      <button value={"/cart"} onClick={handleClick}>
+      <button
+        style={{ fontSize: "4rem" }}
+        value={"/cart"}
+        onClick={handleClick}
+      >
         cart
       </button>
-      <button value={"/orders"} onClick={handleClick}>
+      <button
+        style={{ fontSize: "4rem" }}
+        value={"/orders"}
+        onClick={handleClick}
+      >
         orders
       </button>
-      <button value={"/profile"} onClick={handleClick}>
+      <button
+        style={{ fontSize: "4rem" }}
+        value={"/profile"}
+        onClick={handleClick}
+      >
         profile
       </button>
     </div>

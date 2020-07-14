@@ -18,7 +18,11 @@ const ProductCard = (props) => {
         productId: product.id,
       });
     } else {
-      cartContext.dispatch({ type: "ADD_ITEM_TO_CART", product: product });
+      cartContext.dispatch({
+        type: "ADD_ITEM_TO_CART",
+        product: product,
+        quantity: 1,
+      });
     }
   };
 

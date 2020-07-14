@@ -59,9 +59,8 @@ const AddressPage = () => {
 
   const handleNumberChange = (event) => {
     const re = /[^0-9]/g;
-    if (event.target.value.replace(re, "").length > form.number.length) {
-      handleFormChange(event);
-    }
+    event.target.value = event.target.value.replace(re, "");
+    handleFormChange(event);
   };
 
   return (

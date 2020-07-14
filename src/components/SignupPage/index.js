@@ -54,13 +54,19 @@ const SignupPage = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
 
+  const mCPF = (cpf) => {
+    cpf = cpf.replace(/\D/g, "");
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    return cpf;
+  };
+
   const handleCPFChange = (event) => {
-    handleFormChange(event);
-    // const { name, value } = event.target;
-    // const regex = new RegExp(/[0-9]/s);
-    // if (regex.test(value)) {
-    //   handleFormChange(event);
-    // }
+    event.target.value = mCPF(event.target.value);
+    if (event.target.value.length <= 14) {
+      handleFormChange(event);
+    }
   };
 
   const handleFormSubmit = async (event) => {
@@ -142,10 +148,10 @@ const SignupPage = () => {
             fullWidth
             style={{ marginTop: "0.5rem" }}
           >
-            <InputLabel htmlFor="login-password">Senha</InputLabel>
+            <InputLabel htmlFor="login-password1">Senha</InputLabel>
             <OutlinedInput
               style={{ borderRadius: "0px" }}
-              id="login-password"
+              id="login-password1"
               labelWidth={60}
               onChange={handleFormChange}
               value={form.password}
@@ -172,10 +178,10 @@ const SignupPage = () => {
             fullWidth
             style={{ marginTop: "1rem" }}
           >
-            <InputLabel htmlFor="login-password">Confirmar</InputLabel>
+            <InputLabel htmlFor="login-password2">Confirmar</InputLabel>
             <OutlinedInput
               style={{ borderRadius: "0px" }}
-              id="login-password"
+              id="login-password2"
               labelWidth={60}
               onChange={(e) => setPasswordCheck(e.target.value)}
               value={passwordCheck}

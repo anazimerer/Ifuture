@@ -1,70 +1,36 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { Container, Grow } from '@material-ui/core';
+
+import logoIcon from '../../img/logo.svg';
 
 const SplashScreen = () => {
   const history = useHistory();
-  const handleClick = (e) => {
-    history.push(e.target.value);
-  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      history.replace('/login');
+    }, 3000);
+  }, [history]);
+
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <button
-        style={{ fontSize: "4rem" }}
-        value={"/login"}
-        onClick={handleClick}
-      >
-        login
-      </button>
-      <button
-        style={{ fontSize: "4rem" }}
-        value={"/signup"}
-        onClick={handleClick}
-      >
-        signup
-      </button>
-      <button
-        style={{ fontSize: "4rem" }}
-        value={"/address"}
-        onClick={handleClick}
-      >
-        address
-      </button>
-      <button
-        style={{ fontSize: "4rem" }}
-        value={"/restaurants"}
-        onClick={handleClick}
-      >
-        restaurants
-      </button>
-      <button
-        style={{ fontSize: "4rem" }}
-        value={"/search"}
-        onClick={handleClick}
-      >
-        search
-      </button>
-      <button
-        style={{ fontSize: "4rem" }}
-        value={"/cart"}
-        onClick={handleClick}
-      >
-        cart
-      </button>
-      <button
-        style={{ fontSize: "4rem" }}
-        value={"/orders"}
-        onClick={handleClick}
-      >
-        orders
-      </button>
-      <button
-        style={{ fontSize: "4rem" }}
-        value={"/profile"}
-        onClick={handleClick}
-      >
-        profile
-      </button>
-    </div>
+    <Container
+      style={{
+        height: '100vh',
+        padding: 0,
+        backgroundColor: '#e8222e',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      maxWidth='md'
+    >
+      <Grow in={true} timeout={1500}>
+        <img src={logoIcon} alt='ifuture' />
+      </Grow>
+    </Container>
+
   );
 };
 

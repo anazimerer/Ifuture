@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AppBar from "@material-ui/core/AppBar";
 
 export const AppFooter = styled(AppBar)`
-  height: 2.75rem;
+  height: 3rem;
   background-color: #fafafa;
   backdrop-filter: blur(10px);
   color: black;

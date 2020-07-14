@@ -30,7 +30,7 @@ export const Title = styled.div`
   display: flex;
   grid-area: title;
   justify-content: center;
-  margin-right: 3rem;
+  margin-right: 2rem;
   font-size: 1rem;
   margin-top: 0.5rem;
 `;

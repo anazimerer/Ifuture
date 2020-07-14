@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Card from "@material-ui/core/Card";
 
+import Header from "../Header";
 import Footer from "../Footer";
 
 const FeedPage = () => {
@@ -12,7 +13,7 @@ const FeedPage = () => {
       style={{ border: "1px solid red", height: "100vh" }}
       maxWidth="md"
     >
-      <AppBar>oie</AppBar>
+      <Header title="Ifuture" />
 
       <Card>Restaurante1</Card>
       <Card>Restaurante</Card>

@@ -47,7 +47,11 @@ const OrdersPage = () => {
   };
 
   return (
-    <Container maxWidth='md' className={classes.container}>
+    <Container
+      maxWidth='md'
+      className={classes.container}
+      data-testId='container'
+    >
       <Header back={false} title='Meu Perfil' />
 
       {/* Para Espaçamento */}

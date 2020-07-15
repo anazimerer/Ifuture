@@ -3,6 +3,9 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useRestaurantDetail from "../../hooks/useRestaurantDetail";
 
+import ProductCard from "../ProductCard";
+import Header from "../Header";
+
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -17,8 +20,6 @@ import {
   Loading,
   ProductCategory,
 } from "./styles";
-
-import ProductCard from "../ProductCard";
 
 const RestaurantPage = () => {
   const { restaurantId } = useParams();
@@ -60,6 +61,7 @@ const RestaurantPage = () => {
 
   return restaurant ? (
     <Container maxWidth="xs">
+      <Header back title={"Restaurante"} />
       <Restaurant>
         <Img src={restaurant.logoUrl} />
         <Name>{restaurant.name}</Name>

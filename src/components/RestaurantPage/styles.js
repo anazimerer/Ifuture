@@ -16,7 +16,7 @@ export const Restaurant = styled.div`
   height: 15rem;
   width: 100%;
   border-radius: 8px;
-  margin-top: 0.5rem;
+  margin-top: 3.75rem;
 `;
 
 export const Img = styled.img`

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import CartContext from "../../contexts/CartContext";
+import StoreContext from "../../contexts/StoreContext";
 
 import {
   Product,
@@ -20,7 +20,7 @@ import Modal from "@material-ui/core/Modal";
 
 const ProductCard = (props) => {
   const { product } = props;
-  const cartContext = useContext(CartContext);
+  const cartContext = useContext(StoreContext);
   const [modal, setModal] = useState(false);
   const [quantitySelect, setQuantity] = useState(1);
 

@@ -104,3 +104,17 @@ export const Loading = styled.div`
   justify-content: center;
   height: 50vh;
 `;
+
+export const ProductCategory = styled.div`
+  letter-spacing: -0.29px;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.29px;
+  margin-top: 1rem;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem;
+`;

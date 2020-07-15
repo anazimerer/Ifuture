@@ -91,7 +91,7 @@ export const getRestaurants = async () => {
   };
   try {
     const response = await axios.get(`${baseUrl}/restaurants`, axiosConfig);
-    return response.data.restaurants;
+    return response.data.restaurants
   } catch (error) {
     console.log(error.response.data.message);
     return error.response.data;

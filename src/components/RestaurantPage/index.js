@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import StoreContext from "../../contexts/StoreContext";
 
 import { useParams } from "react-router-dom";
 import useRestaurantDetail from "../../hooks/useRestaurantDetail";
@@ -25,7 +26,15 @@ const RestaurantPage = () => {
   const { restaurantId } = useParams();
   const [restaurant] = useRestaurantDetail(restaurantId);
 
-  // O bloco abaixo vai separar os produtos por categoria e renderiza-lo
+  const restaurantInfo = restaurant && {
+    id: restaurant.id,
+    name: restaurant.name,
+    address: restaurant.address,
+    deliveryTime: restaurant.deliveryTime,
+    shipping: restaurant.shipping,
+  };
+
+  // O bloco abaixo vai separar os produtos por categoria e renderiza-los
   let categories;
   let sortedProducts = [];
   let renderedProducts;
@@ -53,7 +62,11 @@ const RestaurantPage = () => {
       <div key={productsGroup.category}>
         <ProductCategory>{productsGroup.category}</ProductCategory>
         {productsGroup.products.map((item) => (
-          <ProductCard key={item.id} product={item} />
+          <ProductCard
+            key={item.id}
+            product={item}
+            restaurantInfo={restaurantInfo}
+          />
         ))}
       </div>
     ));

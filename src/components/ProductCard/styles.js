@@ -4,12 +4,11 @@ import dropdown from "./dropdown.svg";
 export const Product = styled.div`
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 2.5rem) 2rem;
   grid-template-areas:
     "img img img nme nme nme nme nme nme qtd"
     "img img img des des des des des des des"
     "img img img brl brl ... ... btn btn btn";
-  height: 7.5rem;
   width: 100%;
   border-radius: 8px;
   border: solid 1px #b8b8b8;

@@ -6,6 +6,17 @@ import useRestaurantDetail from "../../hooks/useRestaurantDetail";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+import {
+  Restaurant,
+  Img,
+  Name,
+  Category,
+  Delivery,
+  Shipping,
+  Address,
+  Loading,
+} from "./styles";
+
 import ProductCard from "../ProductCard";
 
 const RestaurantPage = () => {
@@ -14,12 +25,27 @@ const RestaurantPage = () => {
 
   return restaurant ? (
     <Container maxWidth="xs">
+      <Restaurant>
+        <Img src={restaurant.logoUrl} />
+        <Name>{restaurant.name}</Name>
+        <Category>{restaurant.category}</Category>
+        <Delivery>
+          {restaurant.deliveryTime - 10}
+          {" - "}
+          {restaurant.deliveryTime + 10}
+          {" min"}
+        </Delivery>
+        <Shipping>Frete R${restaurant.shipping.toFixed(2)}</Shipping>
+        <Address>{restaurant.address}</Address>
+      </Restaurant>
       {restaurant.products.map((item) => (
         <ProductCard key={item.id} product={item} />
       ))}
     </Container>
   ) : (
-    <CircularProgress style={{ color: "red" }} />
+    <Loading>
+      <CircularProgress style={{ color: "red" }} />
+    </Loading>
   );
 };
 

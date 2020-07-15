@@ -1,13 +1,11 @@
 
 import React from "react";
 import { ItemContainer } from "./styled";
+import ProductCard from "../ProductCard"
 
-
-const CartCard = () => {
+const CartCard = (props) => {
   return <ItemContainer >
-        <p>1 X</p>
-        <p>Produto</p>
-        <button>remover</button>
+      
   </ItemContainer>;
 };
 

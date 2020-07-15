@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import dropdown from "./dropdown.svg";
 
 export const Product = styled.div`
   display: grid;
@@ -94,18 +95,24 @@ export const ModalButton = styled.div`
   margin-top: 1.75rem;
 `;
 
-export const ModalSelect = styled.select`
+export const SelectWrapper = styled.div`
   width: 100%;
   height: 3rem;
+  overflow: hidden;
+  background: url(${dropdown}) no-repeat 95% 50% white;
+  display: inline-block;
+  position: relative;
+`;
+
+export const ModalSelect = styled.select`
+  width: 100%;
+  height: 100%;
   border-radius: 4px;
   border: solid 1px #b8b8b8;
+  padding-left: 1rem;
+  background: transparent;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  background-position-x: 50px;
-  background-position-y: 50px;
-  background: white
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#000" fill-rule="nonzero" d="M18.12 6.705L12 12.885l-6.12-6.18L4 8.606l8 8.099 8-8.099z"/></svg>')
-    no-repeat;
+  appearance: none;
 `;
 
 export const ModalBody = styled.div`

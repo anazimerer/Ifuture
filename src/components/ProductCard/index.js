@@ -19,22 +19,61 @@ import {
 import Modal from "@material-ui/core/Modal";
 
 const ProductCard = (props) => {
-  const { product } = props;
-  const cartContext = useContext(StoreContext);
+  const { product, restaurantInfo } = props;
+  const storeContext = useContext(StoreContext);
   const [modal, setModal] = useState(false);
   const [quantitySelect, setQuantity] = useState(1);
 
-  let quantityInCart = 0;
-  const productInCart = cartContext.cart.find((item) => item.id === product.id);
-  productInCart && (quantityInCart = productInCart.quantity);
+  const findQuantity = () => {
+    const productInCart = storeContext.state.cart.find(
+      (item) => item.id === product.id
+    );
+    return productInCart ? productInCart.quantity : 0;
+  };
+  const quantityInCart = product.quantity || findQuantity();
 
+  // Vou refatorar esta funcao
   const addProductToCart = () => {
-    cartContext.dispatch({
-      type: "ADD_ITEM_TO_CART",
-      product: product,
-      quantity: quantitySelect,
-    });
-
+    // Carrinho vazio
+    if (!storeContext.state.cart.length) {
+      storeContext.dispatch({
+        type: "ADD_RESTAURANT_INFO",
+        restaurantInfo: restaurantInfo,
+      });
+      storeContext.dispatch({
+        type: "ADD_ITEM_TO_CART",
+        product: product,
+        quantity: quantitySelect,
+      });
+      // Produto da mesma loja dos que estao no carrinho
+    } else if (storeContext.state.restaurantInfo.id === restaurantInfo.id) {
+      storeContext.dispatch({
+        type: "ADD_ITEM_TO_CART",
+        product: product,
+        quantity: quantitySelect,
+      });
+      // Ja possui produtos de loja diferente no carrinho
+    } else {
+      if (
+        window.confirm(
+          "Voce ja possui produtos no carrinho, deseja limpar e adicionar este produto ?"
+        )
+      ) {
+        storeContext.dispatch({
+          type: "CLEAR_CART",
+          restaurantInfo: restaurantInfo,
+        });
+        storeContext.dispatch({
+          type: "ADD_RESTAURANT_INFO",
+          restaurantInfo: restaurantInfo,
+        });
+        storeContext.dispatch({
+          type: "ADD_ITEM_TO_CART",
+          product: product,
+          quantity: quantitySelect,
+        });
+      }
+    }
     setModal(false);
   };
 
@@ -42,7 +81,7 @@ const ProductCard = (props) => {
     if (!quantityInCart) {
       setModal(true);
     } else {
-      cartContext.dispatch({
+      storeContext.dispatch({
         type: "REMOVE_ITEM_FROM_CART",
         productId: product.id,
       });

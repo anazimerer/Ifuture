@@ -10,7 +10,7 @@ const App = () => {
   const [state, dispatch] = useReducer(storeReducer, initialState);
 
   return (
-    <StoreContext.Provider value={{ cart: state.cart, dispatch: dispatch }}>
+    <StoreContext.Provider value={{ state, dispatch }}>
       <CssBaseline />
       <Router />
     </StoreContext.Provider>

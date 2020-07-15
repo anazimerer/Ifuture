@@ -50,6 +50,8 @@ export const Qtd = styled.div`
   align-items: center;
   justify-content: center;
   height: 2rem;
+  margin-right: -1px;
+  margin-top: -1px;
 `;
 
 export const Description = styled.div`
@@ -122,6 +124,7 @@ export const ModalBody = styled.div`
   transform: translate(-50%, -50%);
   position: absolute;
   width: 90%;
+  max-width: 400px;
   background-color: white;
   padding: 20px;
 `;

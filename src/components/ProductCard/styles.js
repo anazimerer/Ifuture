@@ -84,6 +84,8 @@ export const Button = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-right: -1px;
+  margin-bottom: -1px;
 `;
 
 export const ModalButton = styled.div`

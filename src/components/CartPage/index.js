@@ -1,7 +1,14 @@
 import React, { useState, useContext } from "react";
-import { Button, Radio, Typography } from "@material-ui/core";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import {
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  Typography,
+  Button,
+} from "@material-ui/core";
 import {
   ContainerCart,
   CartList,
@@ -17,24 +24,18 @@ import ProductCard from "../ProductCard";
 
 const CartPage = () => {
   const classes = useStyles();
- 
-  const [payments, setPayment] = useState("");
-
   const storeContext = useContext(StoreContext);
+  const [paymentMethod, setPaymentMethod] = useState("creditcard");
+
+  const handlePaymentChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
 
   let totalValue = 0;
 
-  storeContext.cart.forEach((product) => {
+  storeContext.state.cart.forEach((product) => {
     totalValue = totalValue + product.price * product.quantity;
   });
-
-  const handleRemoveItemFromCart = (productId) => {
-    storeContext.dispatch({ type: "REMOVE_ITEM_FROM_CART", productId });
-  };
-
-  const choosePaymentMethod = (event) => {
-    setPayment(event.target.value);
-  };
 
   return (
     <ContainerCart>
@@ -47,9 +48,9 @@ const CartPage = () => {
         <Typography>Carrinho</Typography>
       </CartList>
       <div>
-      {/*storeContext.state.cart.map((item)=>(
-         <ProductCard key={item.id} product={item}/>
-      ))*/}
+        {storeContext.state.cart.map((item) => (
+          <ProductCard key={item.id} product={item} />
+        ))}
       </div>
 
       <Frete>
@@ -61,18 +62,20 @@ const CartPage = () => {
       </SubTotal>
       <Typography>Forma de pagamento</Typography>
       <Divider />
-      <Payments>
-        <Radio color="black" onChange={choosePaymentMethod} value="money" />{" "}
-        <Typography>Dinheiro</Typography>
-      </Payments>
-      <Payments>
-        <Radio
-          color="black"
-          onChange={choosePaymentMethod}
-          value="creditcard"
-        />{" "}
-        <Typography>Cartão de crédito</Typography>
-      </Payments>
+      <FormControl>
+        <RadioGroup value={paymentMethod} onChange={handlePaymentChange}>
+          <FormControlLabel
+            value={"cash"}
+            control={<Radio />}
+            label="Dinheiro"
+          />
+          <FormControlLabel
+            value={"creditcard"}
+            control={<Radio />}
+            label="Cartao"
+          />
+        </RadioGroup>
+      </FormControl>
       <Button
         type="submit"
         fullWidth

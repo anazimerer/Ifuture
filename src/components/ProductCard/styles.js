@@ -123,3 +123,7 @@ export const ModalBody = styled.div`
   background-color: white;
   padding: 20px;
 `;
+
+export const ModalTitle = styled.h4`
+  text-align: center;
+`;

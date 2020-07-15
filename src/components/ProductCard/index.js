@@ -13,6 +13,7 @@ import {
   ModalButton,
   ModalSelect,
   SelectWrapper,
+  ModalTitle,
 } from "./styles";
 
 import Modal from "@material-ui/core/Modal";
@@ -58,7 +59,7 @@ const ProductCard = (props) => {
 
   const modalBody = (
     <ModalBody>
-      <h4>Selecione a quantidade desejada</h4>
+      <ModalTitle>Selecione a quantidade desejada</ModalTitle>
       <SelectWrapper>
         <ModalSelect onChange={handleSelectChange}>
           <option value={1}>1</option>

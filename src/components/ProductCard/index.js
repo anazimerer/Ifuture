@@ -1,22 +1,9 @@
 import React, { useContext, useState } from "react";
 import StoreContext from "../../contexts/StoreContext";
 
-import {
-  Product,
-  Img,
-  Name,
-  Qtd,
-  Description,
-  Button,
-  Price,
-  ModalBody,
-  ModalButton,
-  ModalSelect,
-  SelectWrapper,
-  ModalTitle,
-} from "./styles";
+import { Product, Img, Name, Qtd, Description, Button, Price } from "./styles";
 
-import Modal from "@material-ui/core/Modal";
+import QuantityModal from "../QuantityModal";
 
 const ProductCard = (props) => {
   const { product, restaurantInfo } = props;
@@ -96,29 +83,6 @@ const ProductCard = (props) => {
     setQuantity(event.target.value);
   };
 
-  const modalBody = (
-    <ModalBody>
-      <ModalTitle>Selecione a quantidade desejada</ModalTitle>
-      <SelectWrapper>
-        <ModalSelect onChange={handleSelectChange}>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={6}>6</option>
-          <option value={7}>7</option>
-          <option value={8}>8</option>
-          <option value={9}>9</option>
-          <option value={10}>10</option>
-        </ModalSelect>
-      </SelectWrapper>
-      <ModalButton onClick={addProductToCart}>
-        ADICIONAR AO CARRINHO
-      </ModalButton>
-    </ModalBody>
-  );
-
   return (
     <div>
       <Product>
@@ -131,9 +95,12 @@ const ProductCard = (props) => {
           {quantityInCart ? "remover" : "adicionar"}
         </Button>
       </Product>
-      <Modal open={modal} onClose={handleModalClose}>
-        {modalBody}
-      </Modal>
+      <QuantityModal
+        open={modal}
+        onClose={handleModalClose}
+        handleSelectChange={handleSelectChange}
+        addProductToCart={addProductToCart}
+      />
     </div>
   );
 };

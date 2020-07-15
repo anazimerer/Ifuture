@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import dropdown from "./dropdown.svg";
 
 export const Product = styled.div`
   display: grid;

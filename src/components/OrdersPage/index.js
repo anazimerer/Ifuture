@@ -3,9 +3,13 @@ import { useHistory } from 'react-router-dom';
 
 import { getOrdersHistory } from '../../functions/axios';
 
+import Header from '../Header';
+import Footer from '../Footer';
+
+import editIcon from '../../img/edit.svg';
+
 import {
   Container,
-  AppBar,
   Toolbar,
   Grid,
   Box,
@@ -18,15 +22,15 @@ import {
   Paper,
 } from '@material-ui/core';
 
-import editIcon from '../../img/edit.svg';
-
-import Footer from '../Footer';
+import { useStyles } from './styles';
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
+
+  const classes = useStyles();
 
   const user = JSON.parse(window.localStorage.getItem('labefood')).user;
 
@@ -43,12 +47,8 @@ const OrdersPage = () => {
   };
 
   return (
-    <Container style={{ height: '100vh', padding: 0 }} maxWidth='md'>
-      <AppBar color='transparent' elevation={1}>
-        <Toolbar>
-          <Typography style={{ margin: '0 auto' }}>Meu Perfil</Typography>
-        </Toolbar>
-      </AppBar>
+    <Container maxWidth='md' className={classes.container}>
+      <Header back={false} title='Meu Perfil' />
 
       {/* Para Espaçamento */}
       <Toolbar />
@@ -56,11 +56,17 @@ const OrdersPage = () => {
       <Grid container>
         <Grid item xs={12}>
           <List>
-            <ListItem style={{ borderBottom: '1px solid #b8b8b8' }}>
-              <Box style={{ display: 'flex', flexDirection: 'column' }}>
-                <ListItemText style={{ margin: 0 }} primary={user.name} />
-                <ListItemText style={{ margin: 0 }} primary={user.email} />
-                <ListItemText style={{ margin: 0 }} primary={user.cpf} />
+            <ListItem className={classes.userListItem}>
+              <Box className={classes.listBox}>
+                <ListItemText
+                  className={classes.noMargin}
+                  primary={user.name}
+                />
+                <ListItemText
+                  className={classes.noMargin}
+                  primary={user.email}
+                />
+                <ListItemText className={classes.noMargin} primary={user.cpf} />
               </Box>
               <ListItemSecondaryAction>
                 <IconButton
@@ -71,31 +77,26 @@ const OrdersPage = () => {
                   <img
                     src={editIcon}
                     alt='Edit'
-                    style={{
-                      width: '1.5rem',
-                      height: '1.5rem',
-                      objectFit: 'contain',
-                    }}
+                    className={classes.imgEditIcon}
                   />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
 
-            <ListItem style={{ backgroundColor: '#eeeeee' }}>
-              <Box style={{ display: 'flex', flexDirection: 'column' }}>
+            <ListItem className={classes.addressListItem}>
+              <Box className={classes.listBox}>
                 <ListItemText
                   primary={
                     user.hasAddress ? (
-                      <Typography style={{ color: '#b8b8b8' }}>
+                      <Typography className={classes.addressText}>
                         Endereço cadastrado
                       </Typography>
                     ) : (
-                      <Typography style={{ color: '#b8b8b8' }}>
+                      <Typography className={classes.addressText}>
                         Nenhum endereço cadastrado
                       </Typography>
                     )
                   }
-                  style={{ marginBottom: 0 }}
                 />
                 <ListItemText primary={user.hasAddress && user.address} />
               </Box>
@@ -108,11 +109,7 @@ const OrdersPage = () => {
                   <img
                     src={editIcon}
                     alt='Edit'
-                    style={{
-                      width: '1.5rem',
-                      height: '1.5rem',
-                      objectFit: 'contain',
-                    }}
+                    className={classes.imgEditIcon}
                   />
                 </IconButton>
               </ListItemSecondaryAction>
@@ -120,31 +117,14 @@ const OrdersPage = () => {
           </List>
         </Grid>
 
-        <Grid
-          item
-          xs={12}
-          style={{
-            marginTop: '0',
-            paddingLeft: '16px',
-            paddingRight: '16px',
-          }}
-        >
-          <Box style={{ borderBottom: '1px solid black' }}>
-            <Typography
-              style={{
-                fontSize: '1rem',
-                letterSpacing: '-0.39px',
-                padding: '0.5rem 0',
-              }}
-            >
+        <Grid item xs={12} className={classes.ordersOutterGrid}>
+          <Box className={classes.withBorderBottom}>
+            <Typography className={classes.historyText}>
               Histório de pedidos
             </Typography>
           </Box>
 
-          <Grid
-            container
-            style={{ paddingBottom: '2rem', marginTop: '0.5rem' }}
-          >
+          <Grid container className={classes.ordersInnerGrid}>
             {orders.length > 0 ? (
               orders.reverse().map((order) => {
                 const date = new Date(order.expiresAt).toLocaleDateString(
@@ -155,34 +135,16 @@ const OrdersPage = () => {
                     key={order.createdAt}
                     item
                     xs={12}
-                    style={{ marginTop: '.5rem' }}
+                    className={classes.orderGridItem}
                   >
-                    <Paper style={{ padding: '1rem' }}>
-                      <Typography
-                        style={{
-                          color: '#e8222e',
-                          fontSize: '1rem',
-                          letterSpacing: '-0.39px',
-                        }}
-                      >
+                    <Paper className={classes.withPadding}>
+                      <Typography className={classes.restaurantText}>
                         {order.restaurantName}
                       </Typography>
-                      <Typography
-                        style={{
-                          fontSize: '0.75rem',
-                          letterSpacing: '-0.29px',
-                          margin: '0.5rem 0',
-                        }}
-                      >
+                      <Typography className={classes.dateText}>
                         {date}
                       </Typography>
-                      <Typography
-                        style={{
-                          fontSize: '1rem',
-                          fontWeight: 'bold',
-                          letterSpacing: '-0.29px',
-                        }}
-                      >
+                      <Typography className={classes.totalPriceText}>
                         SUBTOTAL R${order.totalPrice.toFixed(2)}
                       </Typography>
                     </Paper>
@@ -190,13 +152,13 @@ const OrdersPage = () => {
                 );
               })
             ) : loading ? (
-              <Grid item xs={12} style={{ marginTop: '.5rem' }}>
+              <Grid item xs={12} className={classes.orderGridItem}>
                 <Typography inline='true' align='center'>
                   Buscando...
                 </Typography>
               </Grid>
             ) : (
-              <Grid item xs={12} style={{ marginTop: '.5rem' }}>
+              <Grid item xs={12} className={classes.orderGridItem}>
                 <Typography inline='true' align='center'>
                   Você não realizou nenhum pedido
                 </Typography>

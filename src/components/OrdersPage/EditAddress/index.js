@@ -1,47 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import Header from '../../Header';
+
 import { getFullAddress } from '../../../functions/axios';
 import { addAddress } from '../../../functions/axios';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-import styled from 'styled-components';
-
 import {
   Container,
-  AppBar,
   Toolbar,
   Grid,
   Typography,
-  IconButton,
   TextField,
   Button,
 } from '@material-ui/core';
 
-import backIcon from '../../../img/back.svg';
-
-export const TextFieldWrapper = styled(TextField)`
-  fieldset {
-    border-radius: 0px;
-  }
-`;
-
-const useStyles = makeStyles((theme) => ({
-  form: {
-    width: '100%', // Fix IE 11 issue.
-  },
-  submit: {
-    borderRadius: '0px',
-    margin: theme.spacing(2, 0, 2),
-    backgroundColor: '#e8222e',
-    textTransform: 'none',
-    color: 'black',
-    '&:hover, &:focus': { backgroundColor: 'red' },
-    fontSize: '1rem',
-    letterSpacing: '-0.39px',
-  },
-}));
+import { useStyles } from './styles';
 
 const EditAddress = () => {
   const classes = useStyles();
@@ -84,10 +58,6 @@ const EditAddress = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleBackIcon = () => {
-    history.replace('/orders');
-  };
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -101,27 +71,8 @@ const EditAddress = () => {
   };
 
   return (
-    <Container style={{ height: '100vh', padding: 0 }} maxWidth='md'>
-      <AppBar color='transparent' elevation={1}>
-        <Toolbar>
-          <IconButton onClick={handleBackIcon}>
-            <img
-              src={backIcon}
-              alt='Go Back'
-              style={{
-                width: '1.44rem',
-                height: '1.5rem',
-                objectFit: 'contain',
-              }}
-            />
-          </IconButton>
-          <Typography
-            style={{ margin: '0 auto', transform: 'translateX(-23.5px)' }}
-          >
-            Editar Endereço
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <Container maxWidth='md' className={classes.container}>
+      <Header back={true} title='Editar Perfil' />
 
       {/* Para Espaçamento */}
       <Toolbar />
@@ -129,24 +80,13 @@ const EditAddress = () => {
       <Grid container>
         <Grid item xs={12}>
           {loading ? (
-            <Typography
-              style={{
-                marginTop: '2rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <Typography className={classes.loadingText}>
               Carregando...
             </Typography>
           ) : (
-            <form
-              onSubmit={handleFormSubmit}
-              className={classes.form}
-              style={{ padding: '1rem' }}
-            >
-              <TextFieldWrapper
-                style={{ borderRadius: '0px', marginBottom: '0.5rem' }}
+            <form onSubmit={handleFormSubmit} className={classes.form}>
+              <TextField
+                className={classes.formText}
                 onChange={handleFormChange}
                 value={form.street}
                 variant='outlined'
@@ -158,8 +98,8 @@ const EditAddress = () => {
                 name='street'
                 type='text'
               />
-              <TextFieldWrapper
-                style={{ borderRadius: '0px', marginBottom: '0.5rem' }}
+              <TextField
+                className={classes.formText}
                 onChange={handleFormChange}
                 value={form.number}
                 variant='outlined'
@@ -171,8 +111,8 @@ const EditAddress = () => {
                 name='number'
                 type='text'
               />
-              <TextFieldWrapper
-                style={{ borderRadius: '0px', marginBottom: '0.5rem' }}
+              <TextField
+                className={classes.formText}
                 onChange={handleFormChange}
                 value={form.complement}
                 variant='outlined'
@@ -184,8 +124,8 @@ const EditAddress = () => {
                 name='complement'
                 type='text'
               />
-              <TextFieldWrapper
-                style={{ borderRadius: '0px', marginBottom: '0.5rem' }}
+              <TextField
+                className={classes.formText}
                 onChange={handleFormChange}
                 value={form.neighbourhood}
                 variant='outlined'
@@ -197,8 +137,8 @@ const EditAddress = () => {
                 name='neighbourhood'
                 type='text'
               />
-              <TextFieldWrapper
-                style={{ borderRadius: '0px', marginBottom: '0.5rem' }}
+              <TextField
+                className={classes.formText}
                 onChange={handleFormChange}
                 value={form.city}
                 variant='outlined'
@@ -210,8 +150,8 @@ const EditAddress = () => {
                 name='city'
                 type='text'
               />
-              <TextFieldWrapper
-                style={{ borderRadius: '0px', marginBottom: '0.5rem' }}
+              <TextField
+                className={classes.formText}
                 onChange={handleFormChange}
                 value={form.state}
                 variant='outlined'

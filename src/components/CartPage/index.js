@@ -17,7 +17,7 @@ import ProductCard from "../ProductCard";
 
 const CartPage = () => {
   const classes = useStyles();
-  const [cart, setCart] = useState({});
+ 
   const [payments, setPayment] = useState("");
 
   const storeContext = useContext(StoreContext);
@@ -47,7 +47,9 @@ const CartPage = () => {
         <Typography>Carrinho</Typography>
       </CartList>
       <div>
-        
+      {/*storeContext.state.cart.map((item)=>(
+         <ProductCard key={item.id} product={item}/>
+      ))*/}
       </div>
 
       <Frete>

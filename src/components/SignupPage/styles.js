@@ -4,6 +4,6 @@ import TextField from "@material-ui/core/TextField";
 
 export const TextFieldWrapper = styled(TextField)`
   fieldset {
-    border-radius: 0px;
+    border-radius: 2px;
   }
 `;

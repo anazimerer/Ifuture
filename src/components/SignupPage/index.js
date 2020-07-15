@@ -150,7 +150,7 @@ const SignupPage = () => {
           >
             <InputLabel htmlFor="login-password1">Senha</InputLabel>
             <OutlinedInput
-              style={{ borderRadius: "0px" }}
+              style={{ borderRadius: "2px" }}
               id="login-password1"
               labelWidth={60}
               onChange={handleFormChange}

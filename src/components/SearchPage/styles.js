@@ -6,8 +6,10 @@ export const Search =styled(SearchIcon)`
     flex-direction: row;
     justify-content: center;
     position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
     margin-top: 12.3vh;
-    margin-left: 1.5vw;   
+    margin-left: 1rem;   
     color: grey;     
 `
 export const TextPage = styled.p`

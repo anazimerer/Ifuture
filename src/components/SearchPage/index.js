@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { getRestaurants } from "../../functions/axios";
 import { useHistory } from 'react-router-dom'
 import useInputValue from '../../hooks/useInput'
-import { getRestaurants } from "../../functions/axios";
+
 import Header from '../Header/index'
 
 import { Search, TextPage} from './styles'
@@ -34,9 +35,9 @@ const useStyles = makeStyles({
 	},
 
 	input: {
-		paddingLeft: "5%",
+		paddingLeft: "5vh",
 		marginTop: "10vh",
-		marginBottom: "2%",
+		marginBottom: "4%",
 		width: "100%",	
 		letterSpacing: "-0.39px",			
 	}
@@ -107,13 +108,13 @@ const SearchPage = () => {
   	return(
 		<Container
 		style={{ height: "100vh" }}
-		maxWidth="md">	
+		maxWidth="xs">	
 			<Header title={"Busca"} back={"true"}/>
 			<div>
 				<Search />
     		    <OutlinedInput
 				  	className= {classes.input}
-				  	color="textSecondary"
+				  	color="secondary"
     		      	type="text"
     		      	name="searchInput"  
 				  	value={searchInput}

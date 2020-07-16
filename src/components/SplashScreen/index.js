@@ -16,7 +16,7 @@ const SplashScreen = () => {
 
   return (
     <Container
-      data-testId='container'
+      data-testid='container'
       style={{
         height: '100vh',
         padding: 0,

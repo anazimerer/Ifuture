@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import dropdown from "./dropdown.svg";
 
 export const ModalBody = styled.div`
   top: 50%;
@@ -14,6 +13,22 @@ export const ModalBody = styled.div`
 
 export const ModalTitle = styled.h4`
   text-align: center;
+`;
+
+export const ModalSubTitle = styled.h5`
+  text-align: center;
+`;
+
+export const ModalButtonConfirm = styled.div`
+  cursor: pointer;
+  color: white;
+  width: 100%;
+  height: 2rem;
+  padding-top: 0.4rem;
+  text-align: center;
+  margin-top: 1.25rem;
+  background-color: #e8222e;
+  border-radius: 4px;
   font-family: Roboto;
   font-size: 1rem;
   font-weight: normal;
@@ -23,32 +38,13 @@ export const ModalTitle = styled.h4`
   letter-spacing: -0.39px;
 `;
 
-export const SelectWrapper = styled.div`
-  width: 100%;
-  height: 3rem;
-  overflow: hidden;
-  background: url(${dropdown}) no-repeat 95% 50% white;
-  display: inline-block;
-  position: relative;
-`;
-
-export const ModalSelect = styled.select`
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  border: solid 1px #b8b8b8;
-  padding-left: 1rem;
-  background: transparent;
-  -webkit-appearance: none;
-  appearance: none;
-`;
-
-export const ModalButton = styled.div`
+export const ModalButtonDeny = styled.div`
   cursor: pointer;
-  color: #4f81a8;
+  color: #e8222e;
   width: 100%;
-  text-align: right;
-  margin-top: 1.75rem;
+  text-align: center;
+  margin-top: 1rem;
+  height: 2rem;
   font-family: Roboto;
   font-size: 1rem;
   font-weight: normal;

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
-import StoreContext from "../../contexts/StoreContext";
+import React from "react";
 
 import { useParams } from "react-router-dom";
+
 import useRestaurantDetail from "../../hooks/useRestaurantDetail";
 
 import ProductCard from "../ProductCard";

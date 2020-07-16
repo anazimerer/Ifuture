@@ -5,13 +5,11 @@ import { getRestaurantDetail } from "../functions/axios";
 const useRestaurantDetail = (restaurantId) => {
   const [restaurant, setRestaurant] = useState();
 
-  const requestRestaurantDetail = async () => {
-    const response = await getRestaurantDetail(restaurantId);
-    setRestaurant(response);
-  };
-
   useEffect(() => {
-    requestRestaurantDetail();
+    (async () => {
+      const response = await getRestaurantDetail(restaurantId);
+      setRestaurant(response);
+    })();
   }, [restaurantId]);
 
   return [restaurant];

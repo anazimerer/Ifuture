@@ -7,6 +7,13 @@ export const ModalButton = styled.div`
   width: 100%;
   text-align: right;
   margin-top: 1.75rem;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
 `;
 
 export const SelectWrapper = styled.div`
@@ -42,4 +49,11 @@ export const ModalBody = styled.div`
 
 export const ModalTitle = styled.h4`
   text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
 `;

@@ -39,7 +39,7 @@ const CartPage = () => {
 
   return (
     <ContainerCart>
-      <Header title="Meu carrinho" />
+      <Header title="Meu carrinho" back />
       <CartList>
         <ListItemText primary="Endereço" />
         <Divider />

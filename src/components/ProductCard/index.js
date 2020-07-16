@@ -1,25 +1,46 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import StoreContext from "../../contexts/StoreContext";
 
 import { Product, Img, Name, Qtd, Description, Button, Price } from "./styles";
 
 import QuantityModal from "../QuantityModal";
+import NewCartModal from "../NewCartModal";
 
 const ProductCard = (props) => {
   const { product, restaurantInfo } = props;
   const storeContext = useContext(StoreContext);
-  const [modal, setModal] = useState(false);
+
+  const history = useHistory();
+
+  const [quantityModal, setQuantityModal] = useState(false);
   const [quantitySelect, setQuantity] = useState(1);
 
-  const findQuantity = () => {
-    const productInCart = storeContext.state.cart.find(
-      (item) => item.id === product.id
-    );
-    return productInCart ? productInCart.quantity : 0;
-  };
-  const quantityInCart = product.quantity || findQuantity();
+  const [newCartModal, setNewCartModal] = useState(false);
 
-  // Vou refatorar esta funcao
+  const handleSelectChange = (event) => {
+    setQuantity(event.target.value);
+  };
+
+  const handleQuantityModalClose = () => {
+    setQuantityModal(false);
+  };
+
+  const handleNewCartModalClose = () => {
+    setNewCartModal(false);
+  };
+
+  const handleAddButton = () => {
+    if (!quantityInCart) {
+      setQuantityModal(true);
+    } else {
+      storeContext.dispatch({
+        type: "REMOVE_ITEM_FROM_CART",
+        productId: product.id,
+      });
+    }
+  };
+
   const addProductToCart = () => {
     // Carrinho vazio
     if (!storeContext.state.cart.length) {
@@ -32,6 +53,8 @@ const ProductCard = (props) => {
         product: product,
         quantity: quantitySelect,
       });
+      setQuantityModal(false);
+      history.push("/cart");
       // Produto da mesma loja dos que estao no carrinho
     } else if (storeContext.state.restaurantInfo.id === restaurantInfo.id) {
       storeContext.dispatch({
@@ -39,49 +62,40 @@ const ProductCard = (props) => {
         product: product,
         quantity: quantitySelect,
       });
+      setQuantityModal(false);
+      history.push("/cart");
       // Ja possui produtos de loja diferente no carrinho
     } else {
-      if (
-        window.confirm(
-          "Voce ja possui produtos no carrinho, deseja limpar e adicionar este produto ?"
-        )
-      ) {
-        storeContext.dispatch({
-          type: "CLEAR_CART",
-          restaurantInfo: restaurantInfo,
-        });
-        storeContext.dispatch({
-          type: "ADD_RESTAURANT_INFO",
-          restaurantInfo: restaurantInfo,
-        });
-        storeContext.dispatch({
-          type: "ADD_ITEM_TO_CART",
-          product: product,
-          quantity: quantitySelect,
-        });
-      }
-    }
-    setModal(false);
-  };
-
-  const handleAddButton = () => {
-    if (!quantityInCart) {
-      setModal(true);
-    } else {
-      storeContext.dispatch({
-        type: "REMOVE_ITEM_FROM_CART",
-        productId: product.id,
-      });
+      setQuantityModal(false);
+      setNewCartModal(true);
     }
   };
 
-  const handleModalClose = () => {
-    setModal(false);
+  const newCartAddProduct = () => {
+    storeContext.dispatch({
+      type: "CLEAR_CART",
+      restaurantInfo: restaurantInfo,
+    });
+    storeContext.dispatch({
+      type: "ADD_RESTAURANT_INFO",
+      restaurantInfo: restaurantInfo,
+    });
+    storeContext.dispatch({
+      type: "ADD_ITEM_TO_CART",
+      product: product,
+      quantity: quantitySelect,
+    });
+    setNewCartModal(false);
+    history.push("/cart");
   };
 
-  const handleSelectChange = (event) => {
-    setQuantity(event.target.value);
+  const findQuantity = () => {
+    const productInCart = storeContext.state.cart.find(
+      (item) => item.id === product.id
+    );
+    return productInCart ? productInCart.quantity : 0;
   };
+  const quantityInCart = product.quantity || findQuantity();
 
   return (
     <div>
@@ -96,10 +110,15 @@ const ProductCard = (props) => {
         </Button>
       </Product>
       <QuantityModal
-        open={modal}
-        onClose={handleModalClose}
+        open={quantityModal}
+        onClose={handleQuantityModalClose}
         handleSelectChange={handleSelectChange}
         addProductToCart={addProductToCart}
+      />
+      <NewCartModal
+        open={newCartModal}
+        onClose={handleNewCartModalClose}
+        newCartAddProduct={newCartAddProduct}
       />
     </div>
   );

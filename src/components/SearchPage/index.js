@@ -92,7 +92,7 @@ const SearchPage = () => {
               	  	  	</Typography>
               	  	  	<Typography
               	  	  	  	variant="body2"
-              	  	  	  	color="textSecondary"
+              	  	  	  	color="secondary"
               	  	  	  	component="p"
               	  	  	>
               	  	  	    {rest.shipping} min
@@ -113,7 +113,7 @@ const SearchPage = () => {
 				<Search />
     		    <OutlinedInput
 				  	className= {classes.input}
-				  	color="textSecondary"
+				  	color="secondary"
     		      	type="text"
     		      	name="searchInput"  
 				  	value={searchInput}

@@ -69,7 +69,7 @@ const LoginPage = () => {
         </Typography>
         <form className={classes.form} onSubmit={handleFormSubmit}>
           <TextFieldWrapper
-            style={{ borderRadius: "0px", marginBottom: "0.5rem" }}
+            style={{ marginBottom: "0.5rem" }}
             onChange={handleFormChange}
             value={form.email}
             variant="outlined"
@@ -89,7 +89,7 @@ const LoginPage = () => {
           >
             <InputLabel htmlFor="login-password">Senha</InputLabel>
             <OutlinedInput
-              style={{ borderRadius: "0px" }}
+              style={{ borderRadius: "2px" }}
               id="login-password"
               labelWidth={60}
               onChange={handleFormChange}
@@ -117,6 +117,7 @@ const LoginPage = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            style={{ borderRadius: "2px" }}
           >
             Entrar
           </Button>

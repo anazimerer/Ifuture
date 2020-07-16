@@ -8,7 +8,7 @@ export const ModalBody = styled.div`
   width: 90%;
   max-width: 400px;
   background-color: white;
-  padding: 20px;
+  padding: 1rem;
 `;
 
 export const ModalTitle = styled.h4`

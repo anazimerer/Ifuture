@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import dropdown from "./dropdown.svg";
 
-export const ModalButton = styled.div`
-  cursor: pointer;
-  color: #4f81a8;
-  width: 100%;
-  text-align: right;
-  margin-top: 1.75rem;
+export const ModalBody = styled.div`
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 90%;
+  max-width: 400px;
+  background-color: white;
+  padding: 1rem;
+`;
+
+export const ModalTitle = styled.h4`
+  text-align: center;
   font-family: Roboto;
   font-size: 1rem;
   font-weight: normal;
@@ -36,19 +43,12 @@ export const ModalSelect = styled.select`
   appearance: none;
 `;
 
-export const ModalBody = styled.div`
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  width: 90%;
-  max-width: 400px;
-  background-color: white;
-  padding: 20px;
-`;
-
-export const ModalTitle = styled.h4`
-  text-align: center;
+export const ModalButton = styled.div`
+  cursor: pointer;
+  color: #4f81a8;
+  width: 100%;
+  text-align: right;
+  margin-top: 1.75rem;
   font-family: Roboto;
   font-size: 1rem;
   font-weight: normal;

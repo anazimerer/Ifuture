@@ -224,11 +224,11 @@ const SignupPage = () => {
             variant="caption"
             style={{
               marginBottom: "0rem",
-              color: `#e02020`,
+              color: `${!passwordValidator() ? "#e02020" : "#fafafa"}`,
               marginLeft: "0.5rem",
             }}
           >
-            {!passwordValidator() && "Deve ser a mesma que a anterior."}
+            Deve ser a mesma que a anterior.
           </Typography>
           <Button
             type="submit"

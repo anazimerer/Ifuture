@@ -154,7 +154,6 @@ const AddressPage = () => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             className={classes.submit}
           >
             Salvar

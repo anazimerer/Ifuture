@@ -42,7 +42,7 @@ const ProductCard = (props) => {
   };
 
   const addProductToCart = () => {
-    // Carrinho vazio
+    // Carrinho vazio, adiciona dados da loja e produto
     if (!storeContext.state.cart.length) {
       storeContext.dispatch({
         type: "ADD_RESTAURANT_INFO",
@@ -71,6 +71,8 @@ const ProductCard = (props) => {
     }
   };
 
+  // Quando o produto e de loja diferente
+  // limpa o carrinho, troca a loja e adiciona produto
   const newCartAddProduct = () => {
     storeContext.dispatch({
       type: "CLEAR_CART",

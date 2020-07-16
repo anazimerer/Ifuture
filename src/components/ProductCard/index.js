@@ -43,7 +43,7 @@ const ProductCard = (props) => {
 
   const addProductToCart = () => {
     // Carrinho vazio, adiciona dados da loja e produto
-    if (!storeContext.state.restaurantInfo) {
+    if (!storeContext.state.cart.length) {
       storeContext.dispatch({
         type: "ADD_RESTAURANT_INFO",
         restaurantInfo: restaurantInfo,

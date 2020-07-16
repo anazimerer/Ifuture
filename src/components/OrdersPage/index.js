@@ -50,7 +50,7 @@ const OrdersPage = () => {
     <Container
       maxWidth='md'
       className={classes.container}
-      data-testId='container'
+      data-testid='container'
     >
       <Header back={false} title='Meu Perfil' />
 

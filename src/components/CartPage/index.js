@@ -45,12 +45,12 @@ const CartPage = () => {
     });
 
     const order = { paymentMethod: paymentMethod, products: products };
-
+    // Ate aqui funciona
     const activeOrder = await placeOrder(
       storeContext.state.restaurantInfo.id,
       order
     );
-
+    // Preciso checar se isso funciona
     if (activeOrder) {
       storeContext.dispatch({
         type: "PLACE_ORDER",
@@ -58,8 +58,6 @@ const CartPage = () => {
       });
     }
   };
-
-  console.log(paymentMethod);
 
   return (
     <ContainerCart>

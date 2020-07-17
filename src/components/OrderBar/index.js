@@ -16,7 +16,7 @@ import {
 
 const OrderBar = () => {
   const storeContext = useContext(StoreContext);
-  const [timeLeft, setTimeLeft] = useState();
+  // const [timeLeft, setTimeLeft] = useState();
 
   // const [activeOrder, setActiveOrder] = useState();
 
@@ -57,18 +57,19 @@ const OrderBar = () => {
   const isOpen =
     location.pathname.includes("restaurants") ||
     location.pathname === "/cart" ||
-    location.pathname === "/orders";
+    location.pathname === "/orders" ||
+    location.pathname === "/search";
 
   // const isExpired = setInterval(() => {
   //   return activeOrder && Date.now() > activeOrder.expiresAt;
   // });
-  console.log(
+
+  const timeLeft =
     storeContext.state.activeOrder &&
-      ((storeContext.state.activeOrder.expiresAt - Date.now()) / 60000).toFixed(
-        2
-      )
-  );
-  console.log(Date.now());
+    ((storeContext.state.activeOrder.expiresAt - Date.now()) / 60000).toFixed(
+      2
+    );
+  console.log(timeLeft);
 
   return storeContext.state.activeOrder ? (
     <OrderAppBar havefooter={havefooter ? 1 : 0} open={isOpen}>

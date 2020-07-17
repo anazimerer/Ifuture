@@ -45,10 +45,19 @@ const CartPage = () => {
     : 0;
 
   storeContext.state.cart.forEach((product) => {
-    totalValue = totalValue + product.price * product.quantity + shipping;
+    totalValue = totalValue + product.price * product.quantity;
   });
 
   const handlePlaceOrder = async () => {
+
+  if (!paymentMethod) {
+    alert("Preencha o método de pagamento");
+    return;
+  } else if (!storeContext.state.cart.length) {
+    alert("Seu carrinho está vazio");
+    return;
+  }
+
     const products = storeContext.state.cart.map((item) => {
       return { id: item.id, quantity: item.quantity };
     });
@@ -69,7 +78,10 @@ const CartPage = () => {
         type: "CLEAR_CART",
       });
     }
+
   };
+
+
 
   return (
     <>
@@ -90,7 +102,7 @@ const CartPage = () => {
             </Typography>
           </>
         ) : (
-          <Typography>Carrinho vazio</Typography>
+          <Typography className="center">Carrinho vazio</Typography>
         )}
       </AddressRest>
       <ProductsList>

@@ -38,6 +38,9 @@ export const AddressRest = styled.div`
   .red {
     color: red;
   }
+  .center {
+    text-align: center;
+  }
 `;
 
 export const ProductsList = styled.div`
@@ -48,7 +51,7 @@ export const ProductsList = styled.div`
 
 export const Payments = styled.div`
   display: flex;
- margin-bottom: 30px;
+  margin-bottom: 50px;
   flex-direction: column;
   font-family: Roboto;
 `;

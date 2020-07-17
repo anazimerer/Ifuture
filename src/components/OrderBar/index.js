@@ -30,7 +30,6 @@ const OrderBar = () => {
           type: "SET_ACTIVE_ORDER",
           activeOrder: response,
         });
-        setTimeLeft(((response.expiresAt - Date.now()) / 60000).toFixed(0));
       })();
       setDelay(60000);
     }

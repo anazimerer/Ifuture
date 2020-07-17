@@ -33,7 +33,7 @@ export const Clock = styled.div`
 
 export const Label = styled.div`
   grid-area: label;
-  font-family: roboto;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: normal;
   font-stretch: normal;
@@ -46,7 +46,7 @@ export const Label = styled.div`
 
 export const Restaurant = styled.div`
   grid-area: restaurant;
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: normal;
   font-stretch: normal;
@@ -59,7 +59,7 @@ export const Restaurant = styled.div`
 
 export const Total = styled.div`
   grid-area: total;
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: bold;
   font-stretch: normal;

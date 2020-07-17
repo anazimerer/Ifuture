@@ -35,6 +35,14 @@ const OrderBar = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (storeContext.state.activeOrder) {
+      setDelay(60000);
+    } else {
+      setDelay(null);
+    }
+  }, [storeContext.state.activeOrder]);
+
   useInterval(() => {
     if (storeContext.state.activeOrder) {
       const minutesToExpire =
@@ -45,7 +53,6 @@ const OrderBar = () => {
         storeContext.dispatch({
           type: "CLEAR_ACTIVE_ORDER",
         });
-        setDelay(null);
       }
     }
   }, delay);

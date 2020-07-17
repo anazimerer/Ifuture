@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
-import useRestaurantDetail from "../../hooks/useRestaurantDetail";
+import useRestaurantDetail from '../../hooks/useRestaurantDetail';
 
-import ProductCard from "../ProductCard";
-import Header from "../Header";
+import ProductCard from '../ProductCard';
+import Header from '../Header';
 
-import Container from "@material-ui/core/Container";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Container from '@material-ui/core/Container';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   Restaurant,
@@ -20,9 +20,9 @@ import {
   Address,
   Loading,
   ProductCategory,
-} from "./styles";
+} from './styles';
 
-import OrderBar from "../OrderBar";
+import OrderBar from '../OrderBar';
 
 const RestaurantPage = () => {
   const { restaurantId } = useParams();
@@ -75,17 +75,17 @@ const RestaurantPage = () => {
   }
 
   return restaurant ? (
-    <Container maxWidth="xs">
-      <Header back title={"Restaurante"} />
+    <Container maxWidth='xs' data-testid='container'>
+      <Header back title={'Restaurante'} />
       <Restaurant>
         <Img src={restaurant.logoUrl} />
         <Name>{restaurant.name}</Name>
         <Category>{restaurant.category}</Category>
         <Delivery>
           {restaurant.deliveryTime - 10}
-          {" - "}
+          {' - '}
           {restaurant.deliveryTime + 10}
-          {" min"}
+          {' min'}
         </Delivery>
         <Shipping>Frete R${restaurant.shipping.toFixed(2)}</Shipping>
         <Address>{restaurant.address}</Address>
@@ -94,8 +94,8 @@ const RestaurantPage = () => {
       <OrderBar />
     </Container>
   ) : (
-    <Loading>
-      <CircularProgress style={{ color: "red" }} />
+    <Loading data-testid='loading'>
+      <CircularProgress style={{ color: 'red' }} />
     </Loading>
   );
 };

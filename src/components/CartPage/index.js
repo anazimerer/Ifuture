@@ -57,7 +57,6 @@ const CartPage = () => {
     alert("Seu carrinho está vazio");
     return;
   }
-
     const products = storeContext.state.cart.map((item) => {
       return { id: item.id, quantity: item.quantity };
     });

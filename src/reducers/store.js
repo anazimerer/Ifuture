@@ -27,7 +27,7 @@ export const storeReducer = (state, action) => {
 
     case "CLEAR_CART": {
       localStorage.removeItem("labefoodCart");
-      return { ...state, cart: [] };
+      return { ...state, cart: [], restaurantInfo: null };
     }
 
     case "ADD_RESTAURANT_INFO":

@@ -16,6 +16,7 @@ const SplashScreen = () => {
 
   return (
     <Container
+      data-testid='container'
       style={{
         height: '100vh',
         padding: 0,
@@ -30,7 +31,6 @@ const SplashScreen = () => {
         <img src={logoIcon} alt='ifuture' />
       </Grow>
     </Container>
-
   );
 };
 

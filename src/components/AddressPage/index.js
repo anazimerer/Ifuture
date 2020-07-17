@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 
@@ -154,7 +154,6 @@ const AddressPage = () => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             className={classes.submit}
           >
             Salvar

@@ -16,7 +16,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 
-import { TextFieldWrapper } from "./styles";
+import { TextFieldWrapper, PasswordCheckLabel } from "./styles";
 import Logo from "./logo.svg";
 
 import Header from "../Header";
@@ -33,10 +33,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     borderRadius: "0px",
-    margin: theme.spacing(2, 0, 2),
     backgroundColor: "#e8222e",
     textTransform: "none",
     color: "black",
+    marginTop: "0.5rem",
     "&:hover, &:focus": { backgroundColor: "red" },
   },
 }));
@@ -69,9 +69,13 @@ const SignupPage = () => {
     }
   };
 
+  const passwordValidator = () => {
+    return form.password === passwordCheck;
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if (form.password === passwordCheck) {
+    if (passwordValidator()) {
       const response = await signup(form);
       if (response.token) {
         localStorage.setItem("labefood", JSON.stringify(response));
@@ -79,8 +83,6 @@ const SignupPage = () => {
       } else {
         window.alert(response.message);
       }
-    } else {
-      window.alert("bad user");
     }
   };
 
@@ -103,7 +105,7 @@ const SignupPage = () => {
         </Typography>
         <form className={classes.form} onSubmit={handleFormSubmit}>
           <TextFieldWrapper
-            style={{ borderRadius: "0px", marginBottom: "0.5rem" }}
+            style={{ marginBottom: "0.5rem" }}
             onChange={handleFormChange}
             value={form.name}
             variant="outlined"
@@ -116,7 +118,7 @@ const SignupPage = () => {
             type="text"
           />
           <TextFieldWrapper
-            style={{ borderRadius: "0px", marginBottom: "0.5rem" }}
+            style={{ marginBottom: "0.5rem" }}
             onChange={handleFormChange}
             value={form.email}
             variant="outlined"
@@ -129,7 +131,7 @@ const SignupPage = () => {
             type="email"
           />
           <TextFieldWrapper
-            style={{ borderRadius: "0px", marginBottom: "0.5rem" }}
+            style={{ marginBottom: "0.5rem" }}
             onChange={handleCPFChange}
             value={form.cpf}
             variant="outlined"
@@ -150,7 +152,7 @@ const SignupPage = () => {
           >
             <InputLabel htmlFor="login-password1">Senha</InputLabel>
             <OutlinedInput
-              style={{ borderRadius: "0px" }}
+              style={{ borderRadius: "4px" }}
               id="login-password1"
               labelWidth={60}
               onChange={handleFormChange}
@@ -166,7 +168,11 @@ const SignupPage = () => {
                     onClick={handleClickShowPassword}
                     edge="end"
                   >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                    {showPassword ? (
+                      <Visibility style={{ color: "black" }} />
+                    ) : (
+                      <VisibilityOff />
+                    )}
                   </IconButton>
                 </InputAdornment>
               }
@@ -178,11 +184,19 @@ const SignupPage = () => {
             fullWidth
             style={{ marginTop: "1rem" }}
           >
-            <InputLabel htmlFor="login-password2">Confirmar</InputLabel>
+            <PasswordCheckLabel
+              htmlFor="login-password2"
+              error={!passwordValidator()}
+            >
+              Confirmar
+            </PasswordCheckLabel>
             <OutlinedInput
-              style={{ borderRadius: "0px" }}
+              error={!passwordValidator()}
+              style={{
+                borderRadius: "4px",
+              }}
               id="login-password2"
-              labelWidth={60}
+              labelWidth={90}
               onChange={(e) => setPasswordCheck(e.target.value)}
               value={passwordCheck}
               required
@@ -196,12 +210,26 @@ const SignupPage = () => {
                     onClick={handleClickShowPasswordCheck}
                     edge="end"
                   >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                    {showPasswordCheck ? (
+                      <Visibility style={{ color: "black" }} />
+                    ) : (
+                      <VisibilityOff />
+                    )}
                   </IconButton>
                 </InputAdornment>
               }
             />
           </FormControl>
+          <Typography
+            variant="caption"
+            style={{
+              marginBottom: "0rem",
+              color: `${!passwordValidator() ? "#e02020" : "#fafafa"}`,
+              marginLeft: "0.5rem",
+            }}
+          >
+            Deve ser a mesma que a anterior.
+          </Typography>
           <Button
             type="submit"
             fullWidth

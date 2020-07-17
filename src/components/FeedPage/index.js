@@ -5,7 +5,7 @@ import Footer from "../Footer";
 import Menu from './menu'
 import { getRestaurants } from '../../functions/axios';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 import {
   CardActionArea,
@@ -30,9 +30,9 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-around',
     border: "1px solid #b8b8b8",
-    marginBottom: '2vh',
-    boxShadow: 'none',
-    borderRadius: '10px'
+    marginBottom: "2vh",
+    boxShadow: "none",
+    borderRadius: "10px",
   },
 
   title: {

@@ -8,7 +8,18 @@ import {
   createBrowserHistory,
 } from 'history';
 
-import SignupPage from './index.js';
+import EditUser from './index.js';
+import useForm from '../../../hooks/useForm.js';
+
+window.localStorage.__proto__.getItem = jest.fn(() =>
+  JSON.stringify({
+    user: {
+      name: 'a',
+      email: 'a',
+      cpf: 'a',
+    },
+  })
+);
 
 const mockLocation = {
   state: {
@@ -40,7 +51,7 @@ const mockLocation = {
 function renderWithRouter(
   ui,
   {
-    route = '/signup',
+    route = '/orders/user',
     history = createMemoryHistory({
       initialEntries: [route, mockLocation.state],
     }),
@@ -59,9 +70,9 @@ function renderWithRouter(
   };
 }
 
-describe('SignupPage', () => {
+describe('EditUser', () => {
   it('renders', () => {
-    const route = '/signup';
+    const route = '/orders/user';
 
     const history = createBrowserHistory();
 
@@ -69,12 +80,12 @@ describe('SignupPage', () => {
     const location = createLocation(history);
 
     const utils = renderWithRouter(
-      <SignupPage history={history} location={location} />,
+      <EditUser history={history} location={location} />,
       { route }
     );
 
-    const name = utils.getByText('Nome', { selector: 'label' });
+    const usernameElement = utils.getByPlaceholderText('Nome e sobrenome');
 
-    expect(name);
+    expect(usernameElement);
   });
 });

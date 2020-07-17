@@ -31,7 +31,6 @@ const OrderBar = () => {
           activeOrder: response,
         });
       })();
-      setDelay(60000);
     }
   }, []);
 

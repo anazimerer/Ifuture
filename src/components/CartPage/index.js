@@ -47,12 +47,12 @@ const CartPage = () => {
     });
 
     const order = { paymentMethod, products };
-    // Ate aqui funciona
+
     const activeOrder = await placeOrder(
       storeContext.state.restaurantInfo.id,
       order
     );
-    // Preciso checar se isso funciona
+
     if (activeOrder) {
       storeContext.dispatch({
         type: "SET_ACTIVE_ORDER",

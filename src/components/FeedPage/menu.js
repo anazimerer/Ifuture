@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import styled from 'styled-components';
 
 const MenuContainer = styled.div `
@@ -18,7 +16,6 @@ const MenuContainer = styled.div `
       letter-spacing: -0.39px;
     }
 `
-
 const useStyles = makeStyles((theme) => ({
     
   root: {

@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const FeedPageContainer = styled.div `
+
+    width: 100vw;
+`
+
 export const TitleBarContainer = styled.div `
 
     width: 100vw;
@@ -31,5 +36,5 @@ export const InfoContainer = styled.div `
 
     display: flex;
     flex-flow: row;
-    
+
 `

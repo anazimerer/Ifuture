@@ -4,6 +4,8 @@ import Header from "../Header";
 import Footer from "../Footer";
 import Menu from './menu'
 import { getRestaurants } from '../../functions/axios';
+import useInputValue from '../../hooks/useInput';
+import { Search } from '../SearchPage/styles';
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -11,29 +13,22 @@ import {
   CardActionArea,
   CardContent,
   Typography ,
-  TextField,
+  OutlinedInput,
   CardMedia ,
   Container,
   Card
 }
 from "@material-ui/core";
 
-import {
-  TitleBarContainer,
-  InfoContainer,
-  Form,
-  Title,
-} from './styles';
-
 const useStyles = makeStyles({
   root: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    border: "1px solid #b8b8b8",
-    marginBottom: "2vh",
-    boxShadow: "none",
-    borderRadius: "10px",
-  },
+	  alignContent: "center",
+	  maxWidth: "345",
+	  border: "1px solid #b8b8b8",
+	  marginBottom: "2vh",
+	  boxShadow: "none",
+	  borderRadius: "10px",
+	},
 
   title: {
     fontSize: '1rem',
@@ -59,18 +54,28 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     color: '#b8b8b8',
-  }
+  },
+
+  input: {
+		paddingLeft: "5vh",
+		marginTop: "10vh",
+		marginBottom: "4%",
+		width: "100%",	
+		letterSpacing: "-0.39px",			
+	}
 });
 
 const FeedPage = () => {
   const history = useHistory();
   const classes = useStyles();
   const [restaurants, setRestaurants] = useState([]);
+  const [searchInput, handleChangeSearchInput]=useInputValue('')
   const title = 'Ifuture'
+
   const getTheRestaurants = () => {(async () => {		
-    const response= await getRestaurants()
-    setRestaurants(response)	
-    })()}
+  const response= await getRestaurants()
+  setRestaurants(response)
+  })()}
 
   useEffect(() => {
     getTheRestaurants()
@@ -78,15 +83,22 @@ const FeedPage = () => {
 
   return (
     <>
-      <Container maxWidth="xs">
+      <Container
+		    style={{ height: "100vh" }}
+		    maxWidth="xs">
         <Header title={title} />
-          <TextField variant="outlined"
-            style={{
-              marginTop: '3rem',
-              marginBottom: '0.5rem',
-              width: '20.5rem',
-              height: '3.5rem',
-            }} />
+        <Search />
+        <OutlinedInput
+				  	className= {classes.input}
+				  	color="secondary"
+    		      	type="text"
+    		      	name="searchInput"  
+				  	    value={searchInput}
+				  	    placeholder="Restaurante"
+    		      	pattern=""
+    		      	title="Esse campo só aceita letras" 
+				  	    onFocus={(() => {history.push('/search')})}
+    		    />
             <Menu restaurants={restaurants} />
               {restaurants.map(rest => {
                 return(

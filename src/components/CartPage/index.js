@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import {
   Radio,
@@ -11,11 +10,13 @@ import {
 } from "@material-ui/core";
 import {
   ContainerCart,
-  CartList,
+  AddressUser,
   SubTotal,
   Frete,
   useStyles,
   Payments,
+  AddressRest,
+  ProductsList,
 } from "./styled";
 import Header from "../Header";
 import Footer from "../Footer";
@@ -27,18 +28,24 @@ import { placeOrder } from "../../functions/axios";
 const CartPage = () => {
   const classes = useStyles();
   const storeContext = useContext(StoreContext);
-  const [paymentMethod, setPaymentMethod] = useState("creditcard");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
   };
+
+  const user = JSON.parse(localStorage.getItem("labefood")).user;
+
+  const shipping = storeContext.state.restaurantInfo
+    ? storeContext.state.restaurantInfo.shipping
+    : 0;
 
   let totalValue = storeContext.state.restaurantInfo
     ? storeContext.state.restaurantInfo.shipping
     : 0;
 
   storeContext.state.cart.forEach((product) => {
-    totalValue = totalValue + product.price * product.quantity;
+    totalValue = totalValue + product.price * product.quantity + shipping;
   });
 
   const handlePlaceOrder = async () => {
@@ -65,45 +72,61 @@ const CartPage = () => {
   };
 
   return (
-    <ContainerCart>
-      <Header title="Meu carrinho" back />
-      <CartList>
-        <ListItemText primary="Endereço" />
+    <>
+     <Header title="Meu carrinho" back />
+     <AddressUser>
+        <Typography className="gray" >Endereço de entrega</Typography>
+        <Typography> {user.hasAddress && user.address}</Typography>
         <Divider />
-      </CartList>
-      <CartList>
-        <Typography>Carrinho</Typography>
-      </CartList>
-      <div>
+      </AddressUser>
+    <ContainerCart>
+      <AddressRest>
+        {storeContext.state.restaurantInfo ? (
+          <>
+            {<Typography className="red">{storeContext.state.restaurantInfo.name}</Typography>}
+            <Typography className="gray">{storeContext.state.restaurantInfo.address}</Typography>
+            <Typography className="gray">
+              {storeContext.state.restaurantInfo.deliveryTime} min
+            </Typography>
+          </>
+        ) : (
+          <Typography>Carrinho vazio</Typography>
+        )}
+      </AddressRest>
+      <ProductsList>
         {storeContext.state.cart.map((item) => (
           <ProductCard key={item.id} product={item} />
         ))}
-      </div>
+      </ProductsList>
 
       <Frete>
-        <Typography>Frete</Typography>{" "}
-        <div>
+        
+        <Typography>Frete</Typography>
           {storeContext.state.restaurantInfo
-            ? storeContext.state.restaurantInfo.shipping
+            ? <>R$ {shipping.toFixed(2)}</>
             : "0.00"}
-        </div>
+      
       </Frete>
 
       <SubTotal>
-        <Typography>SUBTOTAL</Typography> <div>R${totalValue.toFixed(2)}</div>
+        <Typography>SUBTOTAL</Typography> 
+        <Typography color="secondary">
+          <strong>R${totalValue.toFixed(2)}</strong>
+          </Typography>
       </SubTotal>
+      <Payments>
       <Typography>Forma de pagamento</Typography>
       <Divider />
       <FormControl>
         <RadioGroup value={paymentMethod} onChange={handlePaymentChange}>
           <FormControlLabel
             value={"money"}
-            control={<Radio />}
+            control={<Radio color="default"/>}
             label="Dinheiro"
           />
           <FormControlLabel
             value={"creditcard"}
-            control={<Radio />}
+            control={<Radio color="default"/>}
             label="Cartao"
           />
         </RadioGroup>
@@ -118,8 +141,10 @@ const CartPage = () => {
       >
         Confirmar
       </Button>
-      <Footer />
+      </Payments>
     </ContainerCart>
+    <Footer />
+    </>
   );
 };
 

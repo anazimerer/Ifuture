@@ -14,21 +14,42 @@ import { makeStyles } from "@material-ui/core/styles";
 }));
 
 export const ContainerCart = styled.div`
-  height: 90vh;
-  padding: 16px;
+  height: 100vh;
+  padding: 15px;
   display: grid;
   gap: 8px;
 `;
 
-export const CartList = styled.div`
-  text-align: center;
-  padding: 16px;
+export const AddressUser = styled.div`
+  padding-top: 50px;
+  padding-left: 15px;
+  background: #e6e5e5;
+
+  .gray {
+    color: gray;
+  }
 `;
+
+export const AddressRest = styled.div`
+
+  .gray {
+    color: gray;
+  }
+  .red {
+    color: red;
+  }
+`;
+
+export const ProductsList = styled.div`
+  
+`;
+
+
 
 export const Payments = styled.div`
   display: flex;
-  align-items: center;
-  flex-direction: row;
+ margin-bottom: 30px;
+  flex-direction: column;
   font-family: Roboto;
 `;
 
@@ -36,6 +57,8 @@ export const Frete = styled.div`
   display: flex;
   justify-content: space-between;
   font-family: Roboto;
+  align-items: center;
+  width: 100px;
 `;
 
 export const SubTotal = styled.div`

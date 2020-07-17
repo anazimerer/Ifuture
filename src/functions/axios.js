@@ -146,7 +146,7 @@ export const getActiveOrder = async () => {
     return response.data.order;
   } catch (error) {
     console.log(error.response.data.message);
-    return error.response.data;
+    return null;
   }
 };
 

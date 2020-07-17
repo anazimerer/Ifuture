@@ -5,6 +5,8 @@ import { getActiveOrder } from "../../functions/axios";
 
 import { useLocation } from "react-router-dom";
 
+import useInterval from "@use-it/interval";
+
 import {
   OrderAppBar,
   Wrapper,
@@ -16,22 +18,38 @@ import {
 
 const OrderBar = () => {
   const storeContext = useContext(StoreContext);
-  // const [timeLeft, setTimeLeft] = useState();
-
-  // const [activeOrder, setActiveOrder] = useState();
+  const [timeLeft, setTimeLeft] = useState();
+  const [delay, setDelay] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     if (!storeContext.state.activeOrder) {
       (async () => {
         const response = await getActiveOrder();
         storeContext.dispatch({
-          type: "PLACE_ORDER",
+          type: "SET_ACTIVE_ORDER",
           activeOrder: response,
         });
-        // setActiveOrder(response);
+        setTimeLeft(((response.expiresAt - Date.now()) / 60000).toFixed(0));
       })();
+      setDelay(60000);
     }
   }, []);
+
+  useInterval(() => {
+    if (storeContext.state.activeOrder) {
+      const minutesToExpire =
+        (storeContext.state.activeOrder.expiresAt - Date.now()) / 60000;
+      if (minutesToExpire > 0) {
+        setTimeLeft(minutesToExpire);
+      } else {
+        storeContext.dispatch({
+          type: "CLEAR_ACTIVE_ORDER",
+        });
+        setDelay(null);
+      }
+    }
+  }, delay);
 
   const clock = (
     <svg
@@ -48,7 +66,6 @@ const OrderBar = () => {
     </svg>
   );
 
-  const location = useLocation();
   const havefooter =
     location.pathname === "/restaurants" ||
     location.pathname === "/cart" ||
@@ -60,21 +77,22 @@ const OrderBar = () => {
     location.pathname === "/orders" ||
     location.pathname === "/search";
 
-  // const isExpired = setInterval(() => {
-  //   return activeOrder && Date.now() > activeOrder.expiresAt;
-  // });
-
-  const timeLeft =
-    storeContext.state.activeOrder &&
-    ((storeContext.state.activeOrder.expiresAt - Date.now()) / 60000).toFixed(
-      2
-    );
-  console.log(timeLeft);
+  const calculateTimeLeft = () => {
+    if (storeContext.state.activeOrder) {
+      return `${(
+        (storeContext.state.activeOrder.expiresAt - Date.now()) /
+        60000
+      ).toFixed(0)}min`;
+    }
+  };
 
   return storeContext.state.activeOrder ? (
     <OrderAppBar havefooter={havefooter ? 1 : 0} open={isOpen}>
       <Wrapper>
-        <Clock>{clock}</Clock>
+        <Clock>
+          {clock}
+          {calculateTimeLeft()}
+        </Clock>
         <Label>Pedido em andamento</Label>
         <Restaurant>{storeContext.state.activeOrder.restaurantName}</Restaurant>
         <Total>

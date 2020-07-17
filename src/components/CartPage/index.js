@@ -22,6 +22,8 @@ import Footer from "../Footer";
 import StoreContext from "../../contexts/StoreContext";
 import ProductCard from "../ProductCard";
 
+import { placeOrder } from "../../functions/axios";
+
 const CartPage = () => {
   const classes = useStyles();
   const storeContext = useContext(StoreContext);
@@ -36,6 +38,26 @@ const CartPage = () => {
   storeContext.state.cart.forEach((product) => {
     totalValue = totalValue + product.price * product.quantity;
   });
+
+  const handlePlaceOrder = async () => {
+    const products = storeContext.state.cart.map((item) => {
+      return { id: item.id, quantity: item.quantity };
+    });
+
+    const order = { paymentMethod: paymentMethod, products: products };
+    // Ate aqui funciona
+    const activeOrder = await placeOrder(
+      storeContext.state.restaurantInfo.id,
+      order
+    );
+    // Preciso checar se isso funciona
+    if (activeOrder) {
+      storeContext.dispatch({
+        type: "PLACE_ORDER",
+        activeOrder: activeOrder,
+      });
+    }
+  };
 
   return (
     <ContainerCart>
@@ -82,6 +104,7 @@ const CartPage = () => {
         variant="contained"
         color="primary"
         className={classes.submit}
+        onClick={handlePlaceOrder}
       >
         Confirmar
       </Button>

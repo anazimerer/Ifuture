@@ -22,6 +22,8 @@ import {
   ProductCategory,
 } from "./styles";
 
+import OrderBar from "../OrderBar";
+
 const RestaurantPage = () => {
   const { restaurantId } = useParams();
   const [restaurant] = useRestaurantDetail(restaurantId);
@@ -89,6 +91,7 @@ const RestaurantPage = () => {
         <Address>{restaurant.address}</Address>
       </Restaurant>
       {renderedProducts}
+      <OrderBar />
     </Container>
   ) : (
     <Loading>

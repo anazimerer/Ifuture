@@ -8,7 +8,17 @@ import {
   createBrowserHistory,
 } from 'history';
 
-import SignupPage from './index.js';
+import SearchPage from './index.js';
+
+window.localStorage.__proto__.getItem = jest.fn(() =>
+  JSON.stringify({
+    user: {
+      name: 'a',
+      email: 'a',
+      cpf: 'a',
+    },
+  })
+);
 
 const mockLocation = {
   state: {
@@ -40,7 +50,7 @@ const mockLocation = {
 function renderWithRouter(
   ui,
   {
-    route = '/signup',
+    route = '/search',
     history = createMemoryHistory({
       initialEntries: [route, mockLocation.state],
     }),
@@ -59,9 +69,9 @@ function renderWithRouter(
   };
 }
 
-describe('SignupPage', () => {
+describe('SearchPage', () => {
   it('renders', () => {
-    const route = '/signup';
+    const route = '/search';
 
     const history = createBrowserHistory();
 
@@ -69,12 +79,12 @@ describe('SignupPage', () => {
     const location = createLocation(history);
 
     const utils = renderWithRouter(
-      <SignupPage history={history} location={location} />,
+      <SearchPage history={history} location={location} />,
       { route }
     );
 
-    const name = utils.getByText('Nome', { selector: 'label' });
+    const searchElement = utils.getByPlaceholderText('Restaurante');
 
-    expect(name);
+    expect(searchElement);
   });
 });

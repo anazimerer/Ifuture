@@ -8,7 +8,9 @@ import {
   createBrowserHistory,
 } from 'history';
 
-import SignupPage from './index.js';
+import EditAddress from './index.js';
+
+window.localStorage.__proto__.getItem = jest.fn(() => JSON.stringify({}));
 
 const mockLocation = {
   state: {
@@ -40,7 +42,7 @@ const mockLocation = {
 function renderWithRouter(
   ui,
   {
-    route = '/signup',
+    route = '/orders/address',
     history = createMemoryHistory({
       initialEntries: [route, mockLocation.state],
     }),
@@ -59,9 +61,9 @@ function renderWithRouter(
   };
 }
 
-describe('SignupPage', () => {
+describe('EditAddress', () => {
   it('renders', () => {
-    const route = '/signup';
+    const route = '/orders/address';
 
     const history = createBrowserHistory();
 
@@ -69,12 +71,12 @@ describe('SignupPage', () => {
     const location = createLocation(history);
 
     const utils = renderWithRouter(
-      <SignupPage history={history} location={location} />,
+      <EditAddress history={history} location={location} />,
       { route }
     );
 
-    const name = utils.getByText('Nome', { selector: 'label' });
+    const loadingMessage = utils.getByText('Carregando...');
 
-    expect(name);
+    expect(loadingMessage);
   });
 });

@@ -1,14 +1,21 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, waitForElement } from '@testing-library/react';
 
-import { Router } from 'react-router-dom';
+import axios from 'axios';
+
+import {
+  useLocation,
+  Router,
+  MemoryRouter,
+  useHistory,
+} from 'react-router-dom';
 import {
   createMemoryHistory,
   createLocation,
   createBrowserHistory,
 } from 'history';
 
-import SignupPage from './index.js';
+import FeedPage from './index.js';
 
 const mockLocation = {
   state: {
@@ -40,7 +47,7 @@ const mockLocation = {
 function renderWithRouter(
   ui,
   {
-    route = '/signup',
+    route = '/feed',
     history = createMemoryHistory({
       initialEntries: [route, mockLocation.state],
     }),
@@ -59,9 +66,29 @@ function renderWithRouter(
   };
 }
 
-describe('SignupPage', () => {
+jest.mock('axios');
+
+window.localStorage.__proto__.getItem = jest.fn(() => JSON.stringify({}));
+
+axios.get.mockResolvedValue({
+  data: {
+    restaurants: [
+      {
+        id: '1',
+        logoUrl: 'a',
+        shipping: 1,
+        name: 'a',
+      },
+    ],
+  },
+});
+axios.get.mockResolvedValue(
+  Promise.reject({ response: { data: { message: 'error' } } })
+);
+
+describe('FeedPage', () => {
   it('renders', () => {
-    const route = '/signup';
+    const route = '/feed';
 
     const history = createBrowserHistory();
 
@@ -69,12 +96,12 @@ describe('SignupPage', () => {
     const location = createLocation(history);
 
     const utils = renderWithRouter(
-      <SignupPage history={history} location={location} />,
+      <FeedPage history={history} location={location} />,
       { route }
     );
 
-    const name = utils.getByText('Nome', { selector: 'label' });
+    const title = utils.getByText('Ifuture');
 
-    expect(name);
+    expect(title);
   });
 });

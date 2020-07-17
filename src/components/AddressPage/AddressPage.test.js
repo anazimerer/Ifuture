@@ -8,7 +8,7 @@ import {
   createBrowserHistory,
 } from 'history';
 
-import SignupPage from './index.js';
+import AddressPage from './index.js';
 
 const mockLocation = {
   state: {
@@ -40,7 +40,7 @@ const mockLocation = {
 function renderWithRouter(
   ui,
   {
-    route = '/signup',
+    route = '/address',
     history = createMemoryHistory({
       initialEntries: [route, mockLocation.state],
     }),
@@ -59,9 +59,9 @@ function renderWithRouter(
   };
 }
 
-describe('SignupPage', () => {
+describe('AddressPage', () => {
   it('renders', () => {
-    const route = '/signup';
+    const route = '/address';
 
     const history = createBrowserHistory();
 
@@ -69,11 +69,11 @@ describe('SignupPage', () => {
     const location = createLocation(history);
 
     const utils = renderWithRouter(
-      <SignupPage history={history} location={location} />,
+      <AddressPage history={history} location={location} />,
       { route }
     );
 
-    const name = utils.getByText('Nome', { selector: 'label' });
+    const name = utils.getByText('Meu endereço', { selector: 'h1' });
 
     expect(name);
   });

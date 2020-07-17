@@ -1,5 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+
+import axios from 'axios';
+
+import { getOrdersHistory } from '../../functions/axios';
+
 import OrdersPage from './index';
 
 jest.mock('react-router-dom', () => ({
@@ -10,7 +15,12 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => ({
     pathname: jest.fn(),
   }),
+  useParams: () => ({
+    restaurantId: jest.fn(),
+  }),
 }));
+
+jest.mock('axios');
 
 jest.spyOn(window.localStorage.__proto__, 'getItem');
 window.localStorage.__proto__.getItem = jest.fn(() =>
@@ -26,10 +36,23 @@ window.localStorage.__proto__.getItem = jest.fn(() =>
   })
 );
 
-test('renders OrdersPage', () => {
-  const utils = render(<OrdersPage />);
+const axiosGetOrdersHistory = axios.get;
 
-  const containerElement = utils.getByTestId('container');
+beforeEach(() => {
+  axiosGetOrdersHistory.mockReset();
+});
 
-  expect(containerElement).toBeInTheDocument();
+describe('OrdersPage', () => {
+  it('renders without crashing', () => {
+    axiosGetOrdersHistory.mockResolvedValue({ data: { orders: [] } });
+    axiosGetOrdersHistory.mockResolvedValue(
+      Promise.reject({ response: { data: { message: 'error' } } })
+    );
+
+    const utils = render(<OrdersPage />);
+
+    const containerElement = utils.getByTestId('container');
+
+    expect(containerElement).toBeInTheDocument();
+  });
 });

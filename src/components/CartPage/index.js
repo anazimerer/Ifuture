@@ -80,17 +80,15 @@ const CartPage = () => {
 
   };
 
-
-
   return (
     <>
-     <Header title="Meu carrinho" back />
-     <AddressUser>
-        <Typography className="gray" >Endereço de entrega</Typography>
+      <Header title="Meu carrinho" back />
+      <AddressUser>
+        <Typography className="gray">Endereço de entrega</Typography>
         <Typography> {user.hasAddress && user.address}</Typography>
         <Divider />
       </AddressUser>
-    <ContainerCart>
+    <>
       <AddressRest>
         {storeContext.state.restaurantInfo ? (
           <>
@@ -110,51 +108,52 @@ const CartPage = () => {
         ))}
       </ProductsList>
 
-      <Frete>
-        
-        <Typography>Frete</Typography>
-          {storeContext.state.restaurantInfo
-            ? <>R$ {shipping.toFixed(2)}</>
-            : "0.00"}
-      
-      </Frete>
 
-      <SubTotal>
-        <Typography>SUBTOTAL</Typography> 
-        <Typography color="secondary">
-          <strong>R${totalValue.toFixed(2)}</strong>
+        <Frete>
+          <Typography>Frete</Typography>
+          {storeContext.state.restaurantInfo ? (
+            <>R$ {shipping.toFixed(2)}</>
+          ) : (
+            "0.00"
+          )}
+        </Frete>
+
+        <SubTotal>
+          <Typography>SUBTOTAL</Typography>
+          <Typography color="secondary">
+            <strong>R${totalValue.toFixed(2)}</strong>
           </Typography>
-      </SubTotal>
-      <Payments>
-      <Typography>Forma de pagamento</Typography>
-      <Divider />
-      <FormControl>
-        <RadioGroup value={paymentMethod} onChange={handlePaymentChange}>
-          <FormControlLabel
-            value={"money"}
-            control={<Radio color="default"/>}
-            label="Dinheiro"
-          />
-          <FormControlLabel
-            value={"creditcard"}
-            control={<Radio color="default"/>}
-            label="Cartao"
-          />
-        </RadioGroup>
-      </FormControl>
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        onClick={handlePlaceOrder}
-      >
-        Confirmar
-      </Button>
-      </Payments>
-    </ContainerCart>
-    <Footer />
+        </SubTotal>
+        <Payments>
+          <Typography>Forma de pagamento</Typography>
+          <Divider />
+          <FormControl>
+            <RadioGroup value={paymentMethod} onChange={handlePaymentChange}>
+              <FormControlLabel
+                value={"money"}
+                control={<Radio color="default" />}
+                label="Dinheiro"
+              />
+              <FormControlLabel
+                value={"creditcard"}
+                control={<Radio color="default" />}
+                label="Cartao"
+              />
+            </RadioGroup>
+          </FormControl>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handlePlaceOrder}
+          >
+            Confirmar
+          </Button>
+        </Payments>
+      </ContainerCart>
+      <Footer />
     </>
   );
 };

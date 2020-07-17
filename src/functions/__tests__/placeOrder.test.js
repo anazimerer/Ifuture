@@ -1,3 +1,5 @@
+import { cleanup } from '@testing-library/react';
+
 import axios from 'axios';
 
 import { placeOrder } from '../axios';
@@ -8,6 +10,10 @@ const axiosPlaceOrder = axios.post;
 
 beforeEach(() => {
   axiosPlaceOrder.mockReset();
+});
+
+afterEach(() => {
+  cleanup();
 });
 
 jest.spyOn(window.localStorage.__proto__, 'getItem');
@@ -54,6 +60,6 @@ describe('placeOrder', () => {
 
     const returnedData = await placeOrder();
 
-    expect(returnedData).toEqual(resolvedData.response.data);
+    expect(returnedData).toEqual(false);
   });
 });

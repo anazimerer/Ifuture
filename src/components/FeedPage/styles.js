@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const FeedPageContainer = styled.div `
+
+    width: 100vw;
+`
+
 export const TitleBarContainer = styled.div `
 
     width: 100vw;
@@ -17,4 +22,19 @@ export const Title = styled.div `
     justify-content: center;
     text-align: center;
     margin-top: 1.25rem;
+`
+
+export const Form = styled.input `
+
+    width: 20.5rem;
+    height: 3.5rem;
+    border-radius: 2px;
+    border: solid 1px #b8b8b8;
+    margin-top: 0.5rem;
+`
+export const InfoContainer = styled.div `
+
+    display: flex;
+    flex-flow: row;
+
 `

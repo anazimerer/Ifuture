@@ -49,14 +49,13 @@ const CartPage = () => {
   });
 
   const handlePlaceOrder = async () => {
-
-  if (!paymentMethod) {
-    alert("Preencha o método de pagamento");
-    return;
-  } else if (!storeContext.state.cart.length) {
-    alert("Seu carrinho está vazio");
-    return;
-  }
+    if (!paymentMethod) {
+      alert("Preencha o método de pagamento");
+      return;
+    } else if (!storeContext.state.cart.length) {
+      alert("Seu carrinho está vazio");
+      return;
+    }
     const products = storeContext.state.cart.map((item) => {
       return { id: item.id, quantity: item.quantity };
     });
@@ -77,37 +76,42 @@ const CartPage = () => {
         type: "CLEAR_CART",
       });
     }
-
   };
 
   return (
     <>
       <Header title="Meu carrinho" back />
+
       <AddressUser>
         <Typography className="gray">Endereço de entrega</Typography>
         <Typography> {user.hasAddress && user.address}</Typography>
         <Divider />
       </AddressUser>
-    <>
-      <AddressRest>
-        {storeContext.state.restaurantInfo ? (
-          <>
-            {<Typography className="red">{storeContext.state.restaurantInfo.name}</Typography>}
-            <Typography className="gray">{storeContext.state.restaurantInfo.address}</Typography>
-            <Typography className="gray">
-              {storeContext.state.restaurantInfo.deliveryTime} min
-            </Typography>
-          </>
-        ) : (
-          <Typography className="center">Carrinho vazio</Typography>
-        )}
-      </AddressRest>
-      <ProductsList>
-        {storeContext.state.cart.map((item) => (
-          <ProductCard key={item.id} product={item} />
-        ))}
-      </ProductsList>
-
+      <ContainerCart>
+        <AddressRest>
+          {storeContext.state.restaurantInfo ? (
+            <>
+              {
+                <Typography className="red">
+                  {storeContext.state.restaurantInfo.name}
+                </Typography>
+              }
+              <Typography className="gray">
+                {storeContext.state.restaurantInfo.address}
+              </Typography>
+              <Typography className="gray">
+                {storeContext.state.restaurantInfo.deliveryTime} min
+              </Typography>
+            </>
+          ) : (
+            <Typography className="center">Carrinho vazio</Typography>
+          )}
+        </AddressRest>
+        <ProductsList>
+          {storeContext.state.cart.map((item) => (
+            <ProductCard key={item.id} product={item} />
+          ))}
+        </ProductsList>
 
         <Frete>
           <Typography>Frete</Typography>

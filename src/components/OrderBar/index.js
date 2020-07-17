@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { useLocation } from "react-router-dom";
-
 import { getActiveOrder } from "../../functions/axios";
 
 import {
@@ -16,8 +14,6 @@ import {
 const OrderBar = (props) => {
   const { haveFooter } = props;
   const [activeOrder, setActiveOrder] = useState();
-
-  const location = useLocation();
 
   useEffect(() => {
     (async () => {

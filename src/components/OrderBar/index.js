@@ -35,6 +35,10 @@ const OrderBar = () => {
     }
   }, []);
 
+  useEffect(() => {
+    setDelay(60000);
+  }, [storeContext.state.activeOrder]);
+
   useInterval(() => {
     if (storeContext.state.activeOrder) {
       const minutesToExpire =

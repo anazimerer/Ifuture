@@ -22,7 +22,11 @@ export const storeReducer = (state, action) => {
         return product.id !== action.productId;
       });
       localStorage.setItem("labefoodCart", JSON.stringify(newCart));
-      return { ...state, cart: newCart };
+      if (newCart.length) {
+        return { ...state, cart: newCart };
+      } else {
+        return { ...state, cart: [], restaurantInfo: null };
+      }
     }
 
     case "CLEAR_CART": {

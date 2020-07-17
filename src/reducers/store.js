@@ -26,6 +26,7 @@ export const storeReducer = (state, action) => {
     }
 
     case "CLEAR_CART": {
+      localStorage.removeItem("labefoodCart");
       return { ...state, cart: [] };
     }
 
@@ -40,11 +41,11 @@ export const storeReducer = (state, action) => {
       return { ...state, restaurantInfo: null };
     }
 
-    case "PLACE_ORDER": {
+    case "SET_ACTIVE_ORDER": {
       return { ...state, activeOrder: action.activeOrder };
     }
 
-    case "REMOVE_ORDER": {
+    case "CLEAR_ACTIVE_ORDER": {
       return { ...state, activeOrder: null };
     }
 

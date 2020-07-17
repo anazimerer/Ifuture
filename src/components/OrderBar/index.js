@@ -16,19 +16,15 @@ import {
 
 const OrderBar = () => {
   const storeContext = useContext(StoreContext);
-  // const [timeLeft, setTimeLeft] = useState();
-
-  // const [activeOrder, setActiveOrder] = useState();
 
   useEffect(() => {
     if (!storeContext.state.activeOrder) {
       (async () => {
         const response = await getActiveOrder();
         storeContext.dispatch({
-          type: "PLACE_ORDER",
+          type: "SET_ACTIVE_ORDER",
           activeOrder: response,
         });
-        // setActiveOrder(response);
       })();
     }
   }, []);

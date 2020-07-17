@@ -33,7 +33,9 @@ const CartPage = () => {
     setPaymentMethod(event.target.value);
   };
 
-  let totalValue = 0;
+  let totalValue = storeContext.state.restaurantInfo
+    ? storeContext.state.restaurantInfo.shipping
+    : 0;
 
   storeContext.state.cart.forEach((product) => {
     totalValue = totalValue + product.price * product.quantity;
@@ -44,7 +46,7 @@ const CartPage = () => {
       return { id: item.id, quantity: item.quantity };
     });
 
-    const order = { paymentMethod: paymentMethod, products: products };
+    const order = { paymentMethod, products };
     // Ate aqui funciona
     const activeOrder = await placeOrder(
       storeContext.state.restaurantInfo.id,
@@ -53,8 +55,11 @@ const CartPage = () => {
     // Preciso checar se isso funciona
     if (activeOrder) {
       storeContext.dispatch({
-        type: "PLACE_ORDER",
+        type: "SET_ACTIVE_ORDER",
         activeOrder: activeOrder,
+      });
+      storeContext.dispatch({
+        type: "CLEAR_CART",
       });
     }
   };
@@ -76,7 +81,12 @@ const CartPage = () => {
       </div>
 
       <Frete>
-        <Typography>Frete</Typography> <div>R$10,00</div>
+        <Typography>Frete</Typography>{" "}
+        <div>
+          {storeContext.state.restaurantInfo
+            ? storeContext.state.restaurantInfo.shipping
+            : "0.00"}
+        </div>
       </Frete>
 
       <SubTotal>
@@ -87,7 +97,7 @@ const CartPage = () => {
       <FormControl>
         <RadioGroup value={paymentMethod} onChange={handlePaymentChange}>
           <FormControlLabel
-            value={"cash"}
+            value={"money"}
             control={<Radio />}
             label="Dinheiro"
           />

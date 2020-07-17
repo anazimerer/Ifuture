@@ -30,6 +30,7 @@ const OrderBar = () => {
           type: "SET_ACTIVE_ORDER",
           activeOrder: response,
         });
+        setTimeLeft(((response.expiresAt - Date.now()) / 60000).toFixed(0));
       })();
       setDelay(60000);
     }
@@ -39,7 +40,6 @@ const OrderBar = () => {
     if (storeContext.state.activeOrder) {
       const minutesToExpire =
         (storeContext.state.activeOrder.expiresAt - Date.now()) / 60000;
-      console.log(minutesToExpire);
       if (minutesToExpire > 0) {
         setTimeLeft(minutesToExpire);
       } else {
@@ -85,7 +85,6 @@ const OrderBar = () => {
       ).toFixed(0)}min`;
     }
   };
-  console.log(timeLeft);
 
   return storeContext.state.activeOrder ? (
     <OrderAppBar havefooter={havefooter ? 1 : 0} open={isOpen}>

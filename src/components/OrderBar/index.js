@@ -23,7 +23,12 @@ const OrderBar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!storeContext.state.activeOrder) {
+    if (
+      !storeContext.state.activeOrder &&
+      location.pathname !== "/" &&
+      location.pathname !== "/login" &&
+      location.pathname !== "/signup"
+    ) {
       (async () => {
         const response = await getActiveOrder();
         storeContext.dispatch({
@@ -32,7 +37,7 @@ const OrderBar = () => {
         });
       })();
     }
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     if (storeContext.state.activeOrder) {

@@ -3,6 +3,7 @@ export const initialState = {
   cart: JSON.parse(localStorage.getItem("labefoodCart")) || [],
   restaurantInfo:
     JSON.parse(localStorage.getItem("labefoodrestaurantInfo")) || null,
+  activeOrder: null,
 };
 
 export const storeReducer = (state, action) => {
@@ -37,6 +38,14 @@ export const storeReducer = (state, action) => {
 
     case "REMOVE_RESTAURANT_INFO": {
       return { ...state, restaurantInfo: null };
+    }
+
+    case "PLACE_ORDER": {
+      return { ...state, activeOrder: action.activeOrder };
+    }
+
+    case "REMOVE_ORDER": {
+      return { ...state, activeOrder: null };
     }
 
     default:

@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import StoreContext from "../../contexts/StoreContext";
 
 import { getActiveOrder } from "../../functions/axios";
+
+import { useLocation } from "react-router-dom";
 
 import {
   OrderAppBar,
@@ -11,15 +14,23 @@ import {
   Total,
 } from "./styles";
 
-const OrderBar = (props) => {
-  const { haveFooter } = props;
-  const [activeOrder, setActiveOrder] = useState();
+const OrderBar = () => {
+  const storeContext = useContext(StoreContext);
+  const [timeLeft, setTimeLeft] = useState();
+
+  // const [activeOrder, setActiveOrder] = useState();
 
   useEffect(() => {
-    (async () => {
-      const response = await getActiveOrder();
-      setActiveOrder(response);
-    })();
+    if (!storeContext.state.activeOrder) {
+      (async () => {
+        const response = await getActiveOrder();
+        storeContext.dispatch({
+          type: "PLACE_ORDER",
+          activeOrder: response,
+        });
+        // setActiveOrder(response);
+      })();
+    }
   }, []);
 
   const clock = (
@@ -37,13 +48,37 @@ const OrderBar = (props) => {
     </svg>
   );
 
-  return activeOrder ? (
-    <OrderAppBar havefooter={haveFooter ? 1 : 0} open={activeOrder}>
+  const location = useLocation();
+  const havefooter =
+    location.pathname === "/restaurants" ||
+    location.pathname === "/cart" ||
+    location.pathname === "/orders";
+
+  const isOpen =
+    location.pathname.includes("restaurants") ||
+    location.pathname === "/cart" ||
+    location.pathname === "/orders";
+
+  // const isExpired = setInterval(() => {
+  //   return activeOrder && Date.now() > activeOrder.expiresAt;
+  // });
+  console.log(
+    storeContext.state.activeOrder &&
+      ((storeContext.state.activeOrder.expiresAt - Date.now()) / 60000).toFixed(
+        2
+      )
+  );
+  console.log(Date.now());
+
+  return storeContext.state.activeOrder ? (
+    <OrderAppBar havefooter={havefooter ? 1 : 0} open={isOpen}>
       <Wrapper>
         <Clock>{clock}</Clock>
         <Label>Pedido em andamento</Label>
-        <Restaurant>{activeOrder.restaurantName}</Restaurant>
-        <Total>SUBTOTAL R${activeOrder.totalPrice.toFixed(2)}</Total>
+        <Restaurant>{storeContext.state.activeOrder.restaurantName}</Restaurant>
+        <Total>
+          SUBTOTAL R${storeContext.state.activeOrder.totalPrice.toFixed(2)}
+        </Total>
       </Wrapper>
     </OrderAppBar>
   ) : null;

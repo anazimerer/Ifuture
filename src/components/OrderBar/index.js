@@ -36,7 +36,11 @@ const OrderBar = () => {
   }, []);
 
   useEffect(() => {
-    setDelay(60000);
+    if (storeContext.state.activeOrder) {
+      setDelay(60000);
+    } else {
+      setDelay(null);
+    }
   }, [storeContext.state.activeOrder]);
 
   useInterval(() => {
@@ -49,7 +53,6 @@ const OrderBar = () => {
         storeContext.dispatch({
           type: "CLEAR_ACTIVE_ORDER",
         });
-        setDelay(null);
       }
     }
   }, delay);

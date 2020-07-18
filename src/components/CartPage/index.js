@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Divider from "@material-ui/core/Divider";
+import { useHistory } from "react-router-dom";
 import {
   Radio,
   RadioGroup,
@@ -29,6 +30,7 @@ const CartPage = () => {
   const classes = useStyles();
   const storeContext = useContext(StoreContext);
   const [paymentMethod, setPaymentMethod] = useState("");
+  const history = useHistory();
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -75,6 +77,7 @@ const CartPage = () => {
       storeContext.dispatch({
         type: "CLEAR_CART",
       });
+      history.push("/restaurants");
     }
   };
 

@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from "react-router-dom";
 
-import useRestaurantDetail from '../../hooks/useRestaurantDetail';
+import useRestaurantDetail from "../../hooks/useRestaurantDetail";
 
-import ProductCard from '../ProductCard';
-import Header from '../Header';
+import ProductCard from "../ProductCard";
+import Header from "../Header";
 
-import Container from '@material-ui/core/Container';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import {
   Restaurant,
@@ -20,12 +20,14 @@ import {
   Address,
   Loading,
   ProductCategory,
-} from './styles';
+  AddressError,
+} from "./styles";
 
-import OrderBar from '../OrderBar';
+import OrderBar from "../OrderBar";
 
 const RestaurantPage = () => {
   const { restaurantId } = useParams();
+  const history = useHistory();
   const [restaurant] = useRestaurantDetail(restaurantId);
 
   const restaurantInfo = restaurant && {
@@ -40,7 +42,7 @@ const RestaurantPage = () => {
   let categories;
   let sortedProducts = [];
   let renderedProducts;
-  if (restaurant) {
+  if (restaurant && !restaurant.message) {
     // Extrai o nome das categorias, sem repeticao, ordenadas
     categories = new Set(
       restaurant.products.map((item) => item.category).sort()
@@ -74,18 +76,18 @@ const RestaurantPage = () => {
     ));
   }
 
-  return restaurant ? (
-    <Container maxWidth='xs' data-testid='container'>
-      <Header back title={'Restaurante'} />
+  const body = restaurant && !restaurant.message && (
+    <Container maxWidth="xs" data-testid="container">
+      <Header back title={"Restaurante"} />
       <Restaurant>
         <Img src={restaurant.logoUrl} />
         <Name>{restaurant.name}</Name>
         <Category>{restaurant.category}</Category>
         <Delivery>
           {restaurant.deliveryTime - 10}
-          {' - '}
+          {" - "}
           {restaurant.deliveryTime + 10}
-          {' min'}
+          {" min"}
         </Delivery>
         <Shipping>Frete R${restaurant.shipping.toFixed(2)}</Shipping>
         <Address>{restaurant.address}</Address>
@@ -93,9 +95,26 @@ const RestaurantPage = () => {
       {renderedProducts}
       <OrderBar />
     </Container>
+  );
+
+  const addressError = (
+    <Container maxWidth="xs" data-testid="container">
+      <Header back title={"Usuário não possui endereço cadastrado"} />
+      <AddressError onClick={() => history.push("/address")}>
+        Cadastrar endereço
+      </AddressError>
+    </Container>
+  );
+
+  return restaurant ? (
+    restaurant.message ? (
+      <div>{addressError}</div>
+    ) : (
+      <div>{body}</div>
+    )
   ) : (
-    <Loading data-testid='loading'>
-      <CircularProgress style={{ color: 'red' }} />
+    <Loading data-testid="loading">
+      <CircularProgress style={{ color: "red" }} />
     </Loading>
   );
 };

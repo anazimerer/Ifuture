@@ -19,6 +19,16 @@ export const Restaurant = styled.div`
   margin-top: 3.75rem;
 `;
 
+export const AddressError = styled.div`
+  width: 100%;
+  margin-top: 7rem;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  background-color: #e8222e;
+  border-radius: 8px;
+`;
+
 export const Img = styled.img`
   grid-area: img;
   width: 100%;

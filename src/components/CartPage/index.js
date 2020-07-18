@@ -114,18 +114,25 @@ const CartPage = () => {
         </ProductsList>
 
         <Frete>
-          <Typography>Frete</Typography>
-          {storeContext.state.restaurantInfo ? (
-            <>R$ {shipping.toFixed(2)}</>
-          ) : (
-            "0.00"
-          )}
+          <div />
+          <div>
+            <Typography>
+              Frete R$
+              {storeContext.state.restaurantInfo ? (
+                <>R$ {shipping.toFixed(2)}</>
+              ) : (
+                "0.00"
+              )}
+            </Typography>
+          </div>
         </Frete>
 
         <SubTotal>
           <Typography>SUBTOTAL</Typography>
-          <Typography color="secondary">
-            <strong>R${totalValue.toFixed(2)}</strong>
+          <Typography>
+            <strong style={{ color: "#e8222e" }}>
+              R${totalValue.toFixed(2)}
+            </strong>
           </Typography>
         </SubTotal>
         <Payments>

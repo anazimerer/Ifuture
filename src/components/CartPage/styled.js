@@ -1,8 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 
- export const useStyles = makeStyles((theme) => ({
-  
+export const useStyles = makeStyles((theme) => ({
   submit: {
     borderRadius: "0px",
     margin: theme.spacing(2, 0, 2),
@@ -31,7 +30,6 @@ export const AddressUser = styled.div`
 `;
 
 export const AddressRest = styled.div`
-
   .gray {
     color: gray;
   }
@@ -43,11 +41,7 @@ export const AddressRest = styled.div`
   }
 `;
 
-export const ProductsList = styled.div`
-  
-`;
-
-
+export const ProductsList = styled.div``;
 
 export const Payments = styled.div`
   display: flex;
@@ -61,7 +55,7 @@ export const Frete = styled.div`
   justify-content: space-between;
   font-family: Roboto;
   align-items: center;
-  width: 100px;
+  width: 100%;
 `;
 
 export const SubTotal = styled.div`

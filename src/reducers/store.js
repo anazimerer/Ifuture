@@ -1,8 +1,6 @@
 export const initialState = {
-  products: [],
-  cart: JSON.parse(localStorage.getItem("labefoodCart")) || [],
-  restaurantInfo:
-    JSON.parse(localStorage.getItem("labefoodrestaurantInfo")) || null,
+  cart: [],
+  restaurantInfo: null,
   activeOrder: null,
 };
 
@@ -13,7 +11,6 @@ export const storeReducer = (state, action) => {
         ...state.cart,
         { ...action.product, quantity: action.quantity },
       ];
-      localStorage.setItem("labefoodCart", JSON.stringify(newCart));
       return { ...state, cart: newCart };
     }
 
@@ -21,7 +18,6 @@ export const storeReducer = (state, action) => {
       const newCart = state.cart.filter((product) => {
         return product.id !== action.productId;
       });
-      localStorage.setItem("labefoodCart", JSON.stringify(newCart));
       if (newCart.length) {
         return { ...state, cart: newCart };
       } else {
@@ -30,16 +26,10 @@ export const storeReducer = (state, action) => {
     }
 
     case "CLEAR_CART": {
-      localStorage.removeItem("labefoodCart");
-      localStorage.removeItem("labefoodrestaurantInfo");
       return { ...state, cart: [], restaurantInfo: null };
     }
 
     case "ADD_RESTAURANT_INFO":
-      localStorage.setItem(
-        "labefoodrestaurantInfo",
-        JSON.stringify(action.restaurantInfo)
-      );
       return { ...state, restaurantInfo: action.restaurantInfo };
 
     case "REMOVE_RESTAURANT_INFO": {

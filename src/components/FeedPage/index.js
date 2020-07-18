@@ -90,6 +90,7 @@ const FeedPage = () => {
       <AddressError onClick={() => history.push("/address")}>
         Cadastrar endereço
       </AddressError>
+      <Footer />
     </Container>
   );
 

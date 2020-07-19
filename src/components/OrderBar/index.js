@@ -39,7 +39,7 @@ const OrderBar = () => {
         });
       })();
     }
-  }, [location, storeContext]);
+  }, [location]);
 
   useEffect(() => {
     if (storeContext.state.activeOrder) {

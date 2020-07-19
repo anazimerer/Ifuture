@@ -11,7 +11,7 @@ export const Product = styled.div`
   width: 100%;
   border-radius: 8px;
   border: solid 1px #b8b8b8;
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const Img = styled.img`

@@ -17,7 +17,7 @@ const MenuContainer = styled.div`
 `;
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "25.5rem",
+    width: "22.5rem",
     height: "2.625rem",
     marginBottom: "0.5rem",
     display: "flex",

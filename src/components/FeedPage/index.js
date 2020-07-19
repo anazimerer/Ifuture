@@ -29,6 +29,7 @@ const useStyles = makeStyles({
     marginBottom: "2vh",
     boxShadow: "none",
     borderRadius: "10px",
+    height: "11.75rem",
   },
 
   title: {
@@ -55,6 +56,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
     color: "#b8b8b8",
+    marginTop: "-2rem",
   },
 
   input: {
@@ -136,7 +138,7 @@ const FeedPage = () => {
                 <CardMedia
                   component="img"
                   alt={rest.name}
-                  height="140"
+                  height="110"
                   image={rest.logoUrl}
                   title={rest.name}
                 />

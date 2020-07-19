@@ -19,7 +19,7 @@ const Header = (props) => {
   return (
     <AppHeader>
       <Wrapper>
-        {back ? <BackButton onClick={handleClick} /> : <div />}
+        {back && <BackButton onClick={handleClick} />}
         <Title>{title}</Title>
       </Wrapper>
     </AppHeader>

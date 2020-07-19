@@ -12,10 +12,10 @@ export const AppHeader = styled(AppBar)`
 
 export const Wrapper = styled.div`
   display: grid;
-  height: 100%;
-  grid-template-areas: "back title empty";
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 2rem 1fr 2rem;
+  grid-template-areas: "back title ...";
   align-items: center;
+  height: 100%;
 `;
 
 export const BackButton = styled(ArrowBackIosIcon)`
@@ -26,10 +26,8 @@ export const BackButton = styled(ArrowBackIosIcon)`
 `;
 
 export const Title = styled.div`
-  display: flex;
   grid-area: title;
-  justify-content: center;
-  margin-right: 2rem;
   font-size: 1rem;
   margin-top: 0.5rem;
+  text-align: center;
 `;

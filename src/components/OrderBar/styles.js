@@ -25,9 +25,18 @@ export const Wrapper = styled.div`
     "clock total";
 `;
 
-export const Clock = styled.div`
+export const ClockWrapper = styled.div`
   grid-area: clock;
-  margin-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ClockTimer = styled.div`
+  text-align: center;
+`;
+
+export const ClockIcon = styled.div`
+  text-align: center;
   margin-top: 2.75rem;
 `;
 

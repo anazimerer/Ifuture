@@ -35,42 +35,43 @@
 ## Imagens
 
 - Splashscreen
-  ![image](https://user-images.githubusercontent.com/10583511/87863333-795d6b00-c930-11ea-8f7e-f6908ee8f9b3.png)
-- Login
-  ![image](https://user-images.githubusercontent.com/10583511/87863024-04d4fd00-c92d-11ea-981b-bdd08e53f13f.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87868928-6cad3700-c971-11ea-9248-b16371640f3c.png)
 
-- Signup populado
-  ![image](https://user-images.githubusercontent.com/10583511/87863104-e6233600-c92d-11ea-9917-2d3589e9da47.png)
+- Login
+  ![image](https://user-images.githubusercontent.com/10583511/87866965-76796f00-c95e-11ea-8b67-077797ec648a.png)
+
+- Signup
+  ![image](https://user-images.githubusercontent.com/10583511/87866988-c5bf9f80-c95e-11ea-9e5f-15928ecf225c.png)
 
 - Cadastro de endereco
-  ![image](https://user-images.githubusercontent.com/10583511/87863137-4ca85400-c92e-11ea-9b73-3077a848e78e.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87867045-23ec8280-c95f-11ea-9c69-a65f2baea823.png)
 
 - Feed
-  ![image](https://user-images.githubusercontent.com/10583511/87863141-5d58ca00-c92e-11ea-9bd0-a6305e750372.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87867764-d3792300-c966-11ea-8e41-ba2599d22f06.png)
 
 - Busca
-  ![image](https://user-images.githubusercontent.com/10583511/87863146-782b3e80-c92e-11ea-9dd1-002a0b45e92d.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87867774-e68bf300-c966-11ea-8b92-294bbe4f73f7.png)
 
 - Restaurante
-  ![image](https://user-images.githubusercontent.com/10583511/87863154-92651c80-c92e-11ea-89f7-66590217d6b9.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87867788-0f13ed00-c967-11ea-915c-561f5d84b98a.png)
 
 - Carrinho
-  ![image](https://user-images.githubusercontent.com/10583511/87863172-c04a6100-c92e-11ea-9fe2-7dbff66d7fcb.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87868857-de38b580-c970-11ea-8c58-50cd155a43a3.png)
 
 - Pedido em andamento
-  ![image](https://user-images.githubusercontent.com/10583511/87863178-dbb56c00-c92e-11ea-8bf2-43f2e825a6a0.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87868869-f577a300-c970-11ea-8ea9-59f6e494d94e.png)
 
-- Perfil sem endereco
-  ![image](https://user-images.githubusercontent.com/10583511/87863185-f4be1d00-c92e-11ea-870f-60ba19fc64c6.png)
-
-- Perfil populado
-  ![image](https://user-images.githubusercontent.com/10583511/87863245-7b72fa00-c92f-11ea-9b31-520af5168e77.png)
+- Perfil
+  ![image](https://user-images.githubusercontent.com/10583511/87868904-3e2f5c00-c971-11ea-907b-4fc2709087e1.png)
 
 - Editar perfil
-  ![image](https://user-images.githubusercontent.com/10583511/87863200-14554580-c92f-11ea-875b-6394d8574be6.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87868908-4be4e180-c971-11ea-98e9-4e38798fcfd2.png)
 
 - Editar endereco
-  ![image](https://user-images.githubusercontent.com/10583511/87863205-2505bb80-c92f-11ea-94f3-d768782ce999.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87868919-5d2dee00-c971-11ea-9187-2d0978037c8f.png)
+
+- Perfil sem endereco
+  ![image](https://user-images.githubusercontent.com/10583511/87868940-8d758c80-c971-11ea-9dfb-acfc07db643e.png)
 
 - Feed sem endereco
-  ![image](https://user-images.githubusercontent.com/10583511/87863276-de649100-c92f-11ea-9593-558a2e9ff1fb.png)
+  ![image](https://user-images.githubusercontent.com/10583511/87869011-50f66080-c972-11ea-9167-0139c9ed2ba4.png)

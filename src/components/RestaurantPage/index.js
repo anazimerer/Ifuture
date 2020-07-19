@@ -99,7 +99,7 @@ const RestaurantPage = () => {
 
   const addressError = (
     <Container maxWidth="xs" data-testid="container">
-      <Header back title={"Usuário não possui endereço cadastrado"} />
+      <Header back title={"Não há endereço cadastrado"} />
       <AddressError onClick={() => history.push("/address")}>
         Cadastrar endereço
       </AddressError>

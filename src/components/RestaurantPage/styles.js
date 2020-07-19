@@ -24,9 +24,11 @@ export const AddressError = styled.div`
   margin-top: 7rem;
   text-align: center;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1rem;
   background-color: #e8222e;
   border-radius: 8px;
+  height: 2.5rem;
+  padding-top: 0.5rem;
 `;
 
 export const Img = styled.img`

@@ -36,7 +36,6 @@ const OrderBar = () => {
           activeOrder: response,
         });
       })();
-      console.log("oi");
     }
   }, [location]);
 

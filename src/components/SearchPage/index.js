@@ -98,9 +98,16 @@ const SearchPage = () => {
                 >
                   {rest.name}
                 </Typography>
-                <Typography variant="body2" color="secondary" component="p">
-                  {rest.shipping} min
-                </Typography>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Typography style={{ color: "#b8b8b8" }} variant="body2">
+                    {rest.deliveryTime - 10} - {rest.deliveryTime + 10} min
+                  </Typography>
+                  <Typography style={{ color: "#b8b8b8" }} variant="body2">
+                    Frete R${rest.shipping.toFixed(2)}
+                  </Typography>
+                </div>
               </CardContent>
             </CardActionArea>
           </Card>

@@ -52,7 +52,7 @@
 
 - Feed
 
-  ![image](https://user-images.githubusercontent.com/10583511/87867764-d3792300-c966-11ea-8e41-ba2599d22f06.png)
+![image](https://user-images.githubusercontent.com/10583511/87870694-d6810d00-c980-11ea-920d-2d4960de818b.png)
 
 - Busca
 
@@ -68,7 +68,7 @@
 
 - Pedido em andamento
 
-  ![image](https://user-images.githubusercontent.com/10583511/87868869-f577a300-c970-11ea-8ea9-59f6e494d94e.png)
+![image](https://user-images.githubusercontent.com/10583511/87870711-fd3f4380-c980-11ea-8fc9-f99c105f4272.png)
 
 - Perfil
 

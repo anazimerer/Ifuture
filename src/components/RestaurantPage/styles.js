@@ -129,4 +129,5 @@ export const ProductCategory = styled.div`
   margin-top: 1rem;
   border-bottom: 1px solid black;
   padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 `;

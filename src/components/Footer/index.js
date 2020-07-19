@@ -60,8 +60,13 @@ const Footer = () => {
     </svg>
   );
 
+  const isOpen =
+    location.pathname === "/restaurants" ||
+    location.pathname === "/cart" ||
+    location.pathname === "/orders";
+
   return (
-    <AppFooter>
+    <AppFooter open={isOpen}>
       <Wrapper>
         {HomeButton}
         {CartButton}

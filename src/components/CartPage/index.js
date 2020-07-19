@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
 import {
   Radio,
@@ -20,7 +19,6 @@ import {
   ProductsList,
 } from "./styled";
 import Header from "../Header";
-import Footer from "../Footer";
 import StoreContext from "../../contexts/StoreContext";
 import ProductCard from "../ProductCard";
 
@@ -84,102 +82,109 @@ const CartPage = () => {
   return (
     <>
       <Header title="Meu carrinho" back />
+      <div
+        style={{
+          marginBottom: storeContext.state.activeOrder ? "9rem" : "2rem",
+        }}
+      >
+        <AddressUser>
+          <Typography className="gray">Endereço de entrega</Typography>
+          <Typography> {user.hasAddress && user.address}</Typography>
+        </AddressUser>
 
-      <AddressUser>
-        <Typography className="gray">Endereço de entrega</Typography>
-        <Typography> {user.hasAddress && user.address}</Typography>
-      </AddressUser>
-
-      <ContainerCart>
-        <div>
-          <AddressRest>
-            {storeContext.state.restaurantInfo ? (
-              <>
-                {
-                  <Typography className="red">
-                    {storeContext.state.restaurantInfo.name}
+        <ContainerCart>
+          <div>
+            <AddressRest>
+              {storeContext.state.restaurantInfo ? (
+                <>
+                  {
+                    <Typography className="red">
+                      {storeContext.state.restaurantInfo.name}
+                    </Typography>
+                  }
+                  <Typography className="gray">
+                    {storeContext.state.restaurantInfo.address}
                   </Typography>
-                }
-                <Typography className="gray">
-                  {storeContext.state.restaurantInfo.address}
+                  <Typography className="gray">
+                    {storeContext.state.restaurantInfo.deliveryTime} min
+                  </Typography>
+                </>
+              ) : (
+                <Typography className="center">Carrinho vazio</Typography>
+              )}
+            </AddressRest>
+            <ProductsList>
+              {storeContext.state.cart.map((item) => (
+                <ProductCard key={item.id} product={item} />
+              ))}
+            </ProductsList>
+            <Frete>
+              <div />
+              <div>
+                <Typography>
+                  Frete R$
+                  {storeContext.state.restaurantInfo ? (
+                    <>R$ {shipping.toFixed(2)}</>
+                  ) : (
+                    "0.00"
+                  )}
                 </Typography>
-                <Typography className="gray">
-                  {storeContext.state.restaurantInfo.deliveryTime} min
-                </Typography>
-              </>
-            ) : (
-              <Typography className="center">Carrinho vazio</Typography>
-            )}
-          </AddressRest>
-          <ProductsList>
-            {storeContext.state.cart.map((item) => (
-              <ProductCard key={item.id} product={item} />
-            ))}
-          </ProductsList>
-          <Frete>
-            <div />
-            <div>
+              </div>
+            </Frete>
+
+            <SubTotal>
+              <Typography>SUBTOTAL</Typography>
               <Typography>
-                Frete R$
-                {storeContext.state.restaurantInfo ? (
-                  <>R$ {shipping.toFixed(2)}</>
-                ) : (
-                  "0.00"
-                )}
+                <strong style={{ color: "#e8222e" }}>
+                  R${totalValue.toFixed(2)}
+                </strong>
               </Typography>
-            </div>
-          </Frete>
+            </SubTotal>
+            <Payments>
+              <Typography
+                style={{
+                  borderBottom: "1px solid black",
+                  paddingBottom: "0.5rem",
+                }}
+              >
+                Forma de pagamento
+              </Typography>
+              <FormControl>
+                <RadioGroup
+                  value={paymentMethod}
+                  onChange={handlePaymentChange}
+                >
+                  <FormControlLabel
+                    value={"money"}
+                    control={<Radio color="default" />}
+                    label="Dinheiro"
+                  />
+                  <FormControlLabel
+                    value={"creditcard"}
+                    control={<Radio color="default" />}
+                    label="Cartao"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Payments>
+          </div>
 
-          <SubTotal>
-            <Typography>SUBTOTAL</Typography>
-            <Typography>
-              <strong style={{ color: "#e8222e" }}>
-                R${totalValue.toFixed(2)}
-              </strong>
-            </Typography>
-          </SubTotal>
-          <Payments>
-            <Typography
-              style={{
-                borderBottom: "1px solid black",
-                paddingBottom: "0.5rem",
-              }}
-            >
-              Forma de pagamento
-            </Typography>
-            <FormControl>
-              <RadioGroup value={paymentMethod} onChange={handlePaymentChange}>
-                <FormControlLabel
-                  value={"money"}
-                  control={<Radio color="default" />}
-                  label="Dinheiro"
-                />
-                <FormControlLabel
-                  value={"creditcard"}
-                  control={<Radio color="default" />}
-                  label="Cartao"
-                />
-              </RadioGroup>
-            </FormControl>
-          </Payments>
-        </div>
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          className={classes.submit}
-          onClick={handlePlaceOrder}
-          style={{
-            backgroundColor: "#e8222e",
-            opacity:
-              paymentMethod && storeContext.state.cart.length ? "1" : "0.5",
-          }}
-        >
-          Confirmar
-        </Button>
-      </ContainerCart>
-      <Footer />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            className={classes.submit}
+            onClick={handlePlaceOrder}
+            style={{
+              backgroundColor: "#e8222e",
+              opacity:
+                paymentMethod && storeContext.state.cart.length ? "1" : "0.5",
+            }}
+          >
+            Confirmar
+          </Button>
+        </ContainerCart>
+      </div>
     </>
   );
 };

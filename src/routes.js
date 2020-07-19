@@ -15,6 +15,7 @@ import EditAddress from "./components/OrdersPage/EditAddress";
 import ProfilePage from "./components/ProfilePage";
 import FourOFour from "./components/FourOFour";
 import OrderBar from "./components/OrderBar";
+import Footer from "./components/Footer";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -40,6 +41,7 @@ const Router = () => {
         </Route>
       </Switch>
       <OrderBar />
+      <Footer />
     </BrowserRouter>
   );
 };

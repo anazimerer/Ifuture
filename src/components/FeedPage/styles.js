@@ -40,7 +40,7 @@ export const AddressError = styled.div`
   cursor: pointer;
   font-size: 1rem;
   background-color: #e8222e;
-  border-radius: 8px;
+  border-radius: 2px;
   height: 2.5rem;
   padding-top: 0.5rem;
 `;

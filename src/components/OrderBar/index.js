@@ -10,7 +10,9 @@ import useInterval from "@use-it/interval";
 import {
   OrderAppBar,
   Wrapper,
-  Clock,
+  ClockWrapper,
+  ClockIcon,
+  ClockTimer,
   Restaurant,
   Label,
   Total,
@@ -25,9 +27,7 @@ const OrderBar = () => {
   useEffect(() => {
     if (
       !storeContext.state.activeOrder &&
-      location.pathname !== "/" &&
-      location.pathname !== "/login" &&
-      location.pathname !== "/signup"
+      location.pathname === "/restaurants"
     ) {
       (async () => {
         const response = await getActiveOrder();
@@ -36,6 +36,7 @@ const OrderBar = () => {
           activeOrder: response,
         });
       })();
+      console.log("oi");
     }
   }, [location]);
 
@@ -99,10 +100,10 @@ const OrderBar = () => {
   return storeContext.state.activeOrder ? (
     <OrderAppBar havefooter={havefooter ? 1 : 0} open={isOpen}>
       <Wrapper>
-        <Clock>
-          {clock}
-          {calculateTimeLeft()}
-        </Clock>
+        <ClockWrapper>
+          <ClockIcon>{clock}</ClockIcon>
+          <ClockTimer>{calculateTimeLeft()}</ClockTimer>
+        </ClockWrapper>
         <Label>Pedido em andamento</Label>
         <Restaurant>{storeContext.state.activeOrder.restaurantName}</Restaurant>
         <Total>

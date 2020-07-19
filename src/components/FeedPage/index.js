@@ -72,6 +72,7 @@ const FeedPage = () => {
   const [restaurants, setRestaurants] = useState();
   const [searchInput, handleChangeSearchInput] = useInputValue("");
   const title = "Ifuture";
+  const [categoryFilter, setCategoryFilter] = useState();
 
   const getTheRestaurants = () => {
     (async () => {
@@ -111,38 +112,50 @@ const FeedPage = () => {
           history.push("/search");
         }}
       />
-      <Menu restaurants={restaurants} />
-      {restaurants.map((rest) => {
-        return (
-          <Card key={rest.id} className={classes.root}>
-            <CardActionArea
-              onClick={() => {
-                history.push(`/restaurants/${rest.id}`);
-              }}
-            >
-              <CardMedia
-                component="img"
-                alt={rest.name}
-                height="140"
-                image={rest.logoUrl}
-                title={rest.name}
-              />
-              <CardContent>
-                <Typography className={classes.title}>{rest.name}</Typography>
-              </CardContent>
-              <CardContent className={classes.content}>
-                <Typography component="span">
-                  {" "}
-                  {rest.deliveryTime} min{" "}
-                </Typography>
-                <Typography component="span">
-                  Frete R${rest.shipping},00{" "}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        );
-      })}
+      <Menu
+        restaurants={restaurants}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={setCategoryFilter}
+      />
+      {restaurants
+        .filter((item) => {
+          if (!categoryFilter) {
+            return true;
+          } else {
+            return item.category === categoryFilter;
+          }
+        })
+        .map((rest) => {
+          return (
+            <Card key={rest.id} className={classes.root}>
+              <CardActionArea
+                onClick={() => {
+                  history.push(`/restaurants/${rest.id}`);
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  alt={rest.name}
+                  height="140"
+                  image={rest.logoUrl}
+                  title={rest.name}
+                />
+                <CardContent>
+                  <Typography className={classes.title}>{rest.name}</Typography>
+                </CardContent>
+                <CardContent className={classes.content}>
+                  <Typography component="span">
+                    {" "}
+                    {rest.deliveryTime} min{" "}
+                  </Typography>
+                  <Typography component="span">
+                    Frete R${rest.shipping},00{" "}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          );
+        })}
       <Footer />
     </Container>
   );

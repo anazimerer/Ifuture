@@ -26,8 +26,10 @@ const OrderBar = () => {
 
   useEffect(() => {
     if (
-      !storeContext.state.activeOrder &&
-      location.pathname === "/restaurants"
+      (!storeContext.state.activeOrder &&
+        location.pathname.includes("/restaurants")) ||
+      location.pathname === "/orders" ||
+      location.pathname === "/cart"
     ) {
       (async () => {
         const response = await getActiveOrder();
@@ -37,7 +39,7 @@ const OrderBar = () => {
         });
       })();
     }
-  }, [location]);
+  }, [location, storeContext]);
 
   useEffect(() => {
     if (storeContext.state.activeOrder) {

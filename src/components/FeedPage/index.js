@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import StoreContext from "../../contexts/StoreContext";
+
 import { useHistory } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import Menu from "./menu";
 import { getRestaurants } from "../../functions/axios";
-import useInputValue from "../../hooks/useInput";
 import { Search } from "../SearchPage/styles";
 import { AddressError, Loading } from "./styles";
 
@@ -72,9 +73,9 @@ const FeedPage = () => {
   const history = useHistory();
   const classes = useStyles();
   const [restaurants, setRestaurants] = useState();
-  const [searchInput, handleChangeSearchInput] = useInputValue("");
   const title = "Ifuture";
   const [categoryFilter, setCategoryFilter] = useState();
+  const storeContext = useContext(StoreContext);
 
   const getTheRestaurants = () => {
     (async () => {
@@ -99,66 +100,72 @@ const FeedPage = () => {
 
   const body = restaurants && !restaurants.message && (
     <Container style={{ height: "100vh" }} maxWidth="xs">
-      <Header title={title} />
-      <Search />
-      <OutlinedInput
-        className={classes.input}
-        color="secondary"
-        type="text"
-        name="searchInput"
-        value={searchInput}
-        placeholder="Restaurante"
-        pattern=""
-        title="Esse campo só aceita letras"
-        onFocus={() => {
-          history.push("/search");
+      <div
+        style={{
+          marginBottom: storeContext.state.activeOrder ? "11rem" : "4rem",
         }}
-      />
-      <Menu
-        restaurants={restaurants}
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-      />
-      {restaurants
-        .filter((item) => {
-          if (!categoryFilter) {
-            return true;
-          } else {
-            return item.category === categoryFilter;
-          }
-        })
-        .map((rest) => {
-          return (
-            <Card key={rest.id} className={classes.root}>
-              <CardActionArea
-                onClick={() => {
-                  history.push(`/restaurants/${rest.id}`);
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  alt={rest.name}
-                  height="110"
-                  image={rest.logoUrl}
-                  title={rest.name}
-                />
-                <CardContent>
-                  <Typography className={classes.title}>{rest.name}</Typography>
-                </CardContent>
-                <CardContent className={classes.content}>
-                  <Typography component="span">
-                    {" "}
-                    {rest.deliveryTime - 10} - {rest.deliveryTime + 10} min{" "}
-                  </Typography>
-                  <Typography component="span">
-                    Frete R${rest.shipping},00{" "}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          );
-        })}
-      <Footer />
+      >
+        <Header title={title} />
+        <Search />
+        <OutlinedInput
+          className={classes.input}
+          color="secondary"
+          type="text"
+          name="searchInput"
+          placeholder="Restaurante"
+          pattern=""
+          title="Esse campo só aceita letras"
+          onFocus={() => {
+            history.push("/search");
+          }}
+        />
+        <Menu
+          restaurants={restaurants}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+        />
+        {restaurants
+          .filter((item) => {
+            if (!categoryFilter) {
+              return true;
+            } else {
+              return item.category === categoryFilter;
+            }
+          })
+          .map((rest) => {
+            return (
+              <Card key={rest.id} className={classes.root}>
+                <CardActionArea
+                  onClick={() => {
+                    history.push(`/restaurants/${rest.id}`);
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    alt={rest.name}
+                    height="110"
+                    image={rest.logoUrl}
+                    title={rest.name}
+                  />
+                  <CardContent>
+                    <Typography className={classes.title}>
+                      {rest.name}
+                    </Typography>
+                  </CardContent>
+                  <CardContent className={classes.content}>
+                    <Typography component="span">
+                      {" "}
+                      {rest.deliveryTime - 10} - {rest.deliveryTime + 10} min{" "}
+                    </Typography>
+                    <Typography component="span">
+                      Frete R${rest.shipping},00{" "}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            );
+          })}
+      </div>
     </Container>
   );
 

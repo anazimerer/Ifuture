@@ -11,6 +11,7 @@ export const AppFooter = styled(AppBar)`
   top: auto;
   bottom: 0;
   position: fixed;
+  display: ${({ open }) => (open ? "inherit" : "none")};
 `;
 
 export const Wrapper = styled.div`

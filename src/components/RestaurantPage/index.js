@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import StoreContext from "../../contexts/StoreContext";
 
 import { useParams, useHistory } from "react-router-dom";
 
@@ -23,12 +24,11 @@ import {
   AddressError,
 } from "./styles";
 
-import OrderBar from "../OrderBar";
-
 const RestaurantPage = () => {
   const { restaurantId } = useParams();
   const history = useHistory();
   const [restaurant] = useRestaurantDetail(restaurantId);
+  const storeContext = useContext(StoreContext);
 
   const restaurantInfo = restaurant && {
     id: restaurant.id,
@@ -79,21 +79,26 @@ const RestaurantPage = () => {
   const body = restaurant && !restaurant.message && (
     <Container maxWidth="xs" data-testid="container">
       <Header back title={"Restaurante"} />
-      <Restaurant>
-        <Img src={restaurant.logoUrl} />
-        <Name>{restaurant.name}</Name>
-        <Category>{restaurant.category}</Category>
-        <Delivery>
-          {restaurant.deliveryTime - 10}
-          {" - "}
-          {restaurant.deliveryTime + 10}
-          {" min"}
-        </Delivery>
-        <Shipping>Frete R${restaurant.shipping.toFixed(2)}</Shipping>
-        <Address>{restaurant.address}</Address>
-      </Restaurant>
-      {renderedProducts}
-      <OrderBar />
+      <div
+        style={{
+          marginBottom: storeContext.state.activeOrder ? "8rem" : "1rem",
+        }}
+      >
+        <Restaurant>
+          <Img src={restaurant.logoUrl} />
+          <Name>{restaurant.name}</Name>
+          <Category>{restaurant.category}</Category>
+          <Delivery>
+            {restaurant.deliveryTime - 10}
+            {" - "}
+            {restaurant.deliveryTime + 10}
+            {" min"}
+          </Delivery>
+          <Shipping>Frete R${restaurant.shipping.toFixed(2)}</Shipping>
+          <Address>{restaurant.address}</Address>
+        </Restaurant>
+        {renderedProducts}
+      </div>
     </Container>
   );
 

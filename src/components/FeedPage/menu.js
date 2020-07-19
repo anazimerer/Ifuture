@@ -57,6 +57,7 @@ export default function SingleLineGridList({
             <span
               onClick={() => handleClickCategoty(category)}
               style={{
+                cursor: "pointer",
                 color: category === categoryFilter ? "red" : "black",
               }}
             >

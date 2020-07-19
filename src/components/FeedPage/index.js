@@ -148,7 +148,7 @@ const FeedPage = () => {
                 <CardContent className={classes.content}>
                   <Typography component="span">
                     {" "}
-                    {rest.deliveryTime} min{" "}
+                    {rest.deliveryTime - 10} - {rest.deliveryTime + 10} min{" "}
                   </Typography>
                   <Typography component="span">
                     Frete R${rest.shipping},00{" "}

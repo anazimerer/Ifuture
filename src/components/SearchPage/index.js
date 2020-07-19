@@ -102,7 +102,7 @@ const SearchPage = () => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Typography style={{ color: "#b8b8b8" }} variant="body2">
-                    {rest.deliveryTime} min
+                    {rest.deliveryTime - 10} - {rest.deliveryTime + 10} min
                   </Typography>
                   <Typography style={{ color: "#b8b8b8" }} variant="body2">
                     Frete R${rest.shipping.toFixed(2)}
